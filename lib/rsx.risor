@@ -1,4 +1,5 @@
 import os
+import regexp
 
 func log(msg) {
   print(msg)
@@ -8,4 +9,11 @@ func debug(msg) {
   if os.getenv("RSX_DEBUG") == "1" {
     print(msg)
   }
+}
+
+func replace_file(file, rgxp, repl) {
+  f := os.read_file(file)
+  r := regexp.compile(rgxp)
+  r.replace_all(f, repl)
+  os.write_file(file, f)
 }
