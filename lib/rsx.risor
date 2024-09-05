@@ -1,0 +1,11 @@
+import os
+
+func log(msg) {
+  print(msg)
+}
+
+func debug(msg) {
+  if os.getenv("RSX_DEBUG") == "1" {
+    print(msg)
+  }
+}

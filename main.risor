@@ -1,0 +1,90 @@
+import cli
+import rsx
+import exec
+import os
+import filepath
+
+version := "0.1.0"
+debug := false
+
+func copy_libs(dir) {
+  filepath.walk_dir("lib", func(path, dir_entry, err) {
+    if dir_entry.type == "regular" {
+
+      cp(path, filepath.join(dir, path))
+    }
+  })
+}
+
+func build(output) {
+  wd := os.getwd()
+  dir := os.mkdir_temp("/tmp", "rsx")
+  rsx.debug("Building in " + dir)
+
+  os.write_file(filepath.join(dir, "/main.go"), mainGo)
+  os.write_file(filepath.join(dir, "/main.risor"), os.read_file("main.risor"))
+  os.mkdir_all(filepath.join(dir, "/lib"))
+  os.write_file(filepath.join(dir, "/lib/rsx.risor"), rsxLib)
+
+  copy_libs(dir)
+
+  cd(dir)
+  exec("go", ["mod", "init", "rsxcmd"])
+  exec("go", ["mod", "tidy"])
+  exec("go", ["build", "-o", filepath.join(wd, output)])
+  if !debug {
+    os.remove_all(dir)
+  }
+}
+
+cli.app({
+    name: "rsx",
+    usage_string: "Build risor enabled binaries",
+    usage: "build Risor enabled binaries",
+    version: version,
+    commands: [
+        cli.command({
+            args: true,
+            name: "new",
+            description: "Build the current directory",
+            action: func(ctx) {
+              name := ctx.args()[0]
+              os.mkdir(name)
+              os.write_file(filepath.join(name, "main.risor"), "import rsx\n"+`rsx.log("Hello, World!")`)
+              os.mkdir(filepath.join(name, "lib"))
+              os.write_file(filepath.join(name, "/lib/rsx.risor"), rsxLib)
+            },
+            flags: [
+                cli.flag({
+                    name: "debug",
+                    type: "bool",
+                }),
+            ],
+        }),
+        cli.command({
+            args: true,
+            name: "build",
+            description: "Build the current directory",
+            action: func(ctx) {
+              if ctx.bool("debug") {
+                debug = true
+                os.setenv("RSX_DEBUG", "1")
+              }
+              output := ctx.string("output")
+              build(output)
+            },
+            flags: [
+                cli.flag({
+                    name: "output",
+                    aliases: ["o"],
+                    type: "string",
+                    value: filepath.split(os.getwd())[-1],
+                }),
+                cli.flag({
+                    name: "debug",
+                    type: "bool",
+                }),
+            ],
+        }),
+    ],
+}).run()
