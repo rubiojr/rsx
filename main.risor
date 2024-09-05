@@ -93,6 +93,15 @@ cli.app({
         }),
         cli.command({
             args: true,
+            name: "refresh",
+            description: "Update the RSX library",
+            action: func(ctx) {
+              os.mkdir_all("lib")
+              os.write_file(filepath.join("lib/rsx.risor"), _rsxLib)
+            },
+        }),
+        cli.command({
+            args: true,
             name: "build",
             description: "Build the current directory",
             action: func(ctx) {
