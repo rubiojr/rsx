@@ -4,7 +4,7 @@ import exec
 import os
 import filepath
 
-version := "0.1.0"
+version := "0.1.2"
 debug := false
 
 func cleanup(dir) {
