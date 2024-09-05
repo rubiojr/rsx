@@ -1,58 +1,82 @@
-# RSX
+# RSX: Package Risor Scripts into Go Binaries
 
-`rsx` can package your [Risor](https://risor.io) scripts in a Go binary, so you can distribute your app without dependencies.
+`rsx` is a tool that packages your [Risor](https://risor.io) scripts into a standalone Go binary, allowing for easy distribution of your applications without dependencies.
 
 > [!WARNING]
-> rsx is currently Alpha quality.
+> RSX is currently in alpha.
 
-## Install
+## Features
 
-```
-go install  github.com/rubiojr/rsx@latest
-```
+- Package Risor scripts into a single executable
+- Built-in `rsx` module for extended functionality
+- Easy project initialization and management
 
-## Usage
+## Pre-requisites
 
-Create a new Risor project:
+You need to have Go installed on your system. If you don't have it, you can download it from the [official website](https://golang.org/dl/).
 
-```sh
-rsx new myapp
-cd myapp
-```
+## Installation
 
-The entry point will be `main.risor`:
+Install RSX using Go:
 
-```
-rsx.log("hello from Risor!")
+```bash
+go install github.com/rubiojr/rsx@latest
 ```
 
-Build the Go binary:
+Ensure that your Go bin directory is in your PATH.
 
-```
-rsx build
-```
+## Quick Start
 
-Run it:
+1. Create a new Risor project:
+   ```bash
+   rsx new myapp
+   cd myapp
+   ```
 
-```
-./myapp
-Hello, World!
-```
+2. Edit the main script (`main.risor`):
+   ```risor
+   rsx.log("Hello from Risor!")
+   ```
 
-## Adding modules
+3. Build the Go binary:
+   ```bash
+   rsx build
+   ```
 
-Any additional `.risor` files in the `lib` directory will be available at run time.
+4. Run your application:
+   ```bash
+   ./myapp
+   # Output: Hello from Risor!
+   ```
 
-## Built-in rsx module
+## Project Structure
 
-There's a built-in `rsx` module that provides some basic functionality. More modules will be added in the future.
+- `main.risor`: The entry point of your application.
+- `lib/`: Directory for additional Risor modules.
+- `lib/rsx.risor`: Built-in RSX module with utility functions.
 
-Check [rsx.risor](lib/rsx.risor) for the available functions.
+## Adding Custom Modules
 
-## Development tips
+Place any additional `.risor` files in the `lib` directory. They will be automatically available at runtime.
 
-While in development, you can run the Risor scripts directly:
+## The RSX Module
 
-```
+RSX comes with a built-in `rsx` module providing basic functionality. For available functions, refer to [rsx.risor](lib/rsx.risor).
+
+## Development Workflow
+
+During development, you can run your Risor scripts directly:
+
+```bash
 risor --modules lib main.risor
 ```
+
+This allows for faster iteration without needing to rebuild the binary.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Support
+
+For issues, questions, or contributions, please [open an issue](https://github.com/rubiojr/rsx/issues) on GitHub.
