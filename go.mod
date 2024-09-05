@@ -6,6 +6,7 @@ require (
 	github.com/charmbracelet/log v0.4.0
 	github.com/risor-io/risor v1.6.0
 	github.com/risor-io/risor/modules/bcrypt v1.6.0
+	github.com/risor-io/risor/modules/carbon v1.6.0
 	github.com/risor-io/risor/modules/cli v1.6.0
 	github.com/risor-io/risor/modules/sql v1.6.0
 	github.com/risor-io/risor/modules/uuid v1.6.0
@@ -20,6 +21,7 @@ require (
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/go-sql-driver/mysql v1.8.0 // indirect
 	github.com/gofrs/uuid/v5 v5.1.0 // indirect
+	github.com/golang-module/carbon/v2 v2.3.12 // indirect
 	github.com/golang-sql/civil v0.0.0-20220223132316-b832511892a9 // indirect
 	github.com/golang-sql/sqlexp v0.1.0 // indirect
 	github.com/lib/pq v1.10.9 // indirect

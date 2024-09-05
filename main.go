@@ -11,6 +11,7 @@ import (
 	mbase64 "github.com/risor-io/risor/modules/base64"
 	mbcrypt "github.com/risor-io/risor/modules/bcrypt"
 	mbytes "github.com/risor-io/risor/modules/bytes"
+	mcarbon "github.com/risor-io/risor/modules/carbon"
 	mcli "github.com/risor-io/risor/modules/cli"
 	mcolor "github.com/risor-io/risor/modules/color"
 	mexec "github.com/risor-io/risor/modules/exec"
@@ -83,6 +84,7 @@ func main() {
 		risor.WithGlobal("fmt", mfmt.Module()),
 		risor.WithGlobal("color", mcolor.Module()),
 		risor.WithGlobal("bcrypt", mbcrypt.Module()),
+		risor.WithGlobal("carbon", mcarbon.Module()),
 		risor.WithGlobal("_mainGo", _mainGo),
 		risor.WithGlobal("_importerGo", _importerGo),
 		risor.WithGlobal("_rsxLib", _rsxLib),
