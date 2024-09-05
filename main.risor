@@ -16,16 +16,22 @@ func cleanup(dir) {
 }
 
 func go_build(dir, output) {
-  cd(dir)
+  bin_path := output
+  if !filepath.is_abs(bin_path) {
+    bin_path = filepath.join(os.getwd(), output)
+  }
 
-  rsx.debug('Running go mod init {output}')
-  exec("go", ["mod", "init", output])
+  cd(dir)
+  rsx.debug('Working directory {dir}')
+
+  rsx.debug('Running go mod init rsxmod')
+  exec("go", ["mod", "init", "rsxmod"])
 
   rsx.debug('Running go mod tidy')
   exec("go", ["mod", "tidy"])
 
-  rsx.debug('Running go build -o {output}...')
-  exec("go", ["build", "-o", filepath.join(os.getwd(), output)])
+  rsx.debug('Running go build -o {bin_path}...')
+  exec("go", ["build", "-o", bin_path])
 }
 
 func copy_libs(dir) {
