@@ -40,6 +40,12 @@ Hello, World!
 
 Any additional `.risor` files in the `lib` directory will be available at run time.
 
+## Built-in rsx module
+
+There's a built-in `rsx` module that provides some basic functionality. More modules will be added in the future.
+
+Check [rsx.risor](lib/rsx.risor) for the available functions.
+
 ## Development tips
 
 While in development, you can run the Risor scripts directly:

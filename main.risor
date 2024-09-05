@@ -7,34 +7,58 @@ import filepath
 version := "0.1.0"
 debug := false
 
+func cleanup(dir) {
+  rsx.debug('Cleaning up {dir}')
+  if debug {
+    rsx.debug('Debug enabled, not removing temp dir {dir}')
+  }
+  os.remove_all(dir)
+}
+
+func go_build(dir, output) {
+  cd(dir)
+
+  rsx.debug('Running go mod init {output}')
+  exec("go", ["mod", "init", output])
+
+  rsx.debug('Running go mod tidy')
+  exec("go", ["mod", "tidy"])
+
+  rsx.debug('Running go build -o {output}...')
+  exec("go", ["build", "-o", filepath.join(os.getwd(), output)])
+}
+
 func copy_libs(dir) {
   filepath.walk_dir("lib", func(path, dir_entry, err) {
     if dir_entry.type == "regular" {
-
-      cp(path, filepath.join(dir, path))
+      dest := filepath.join(dir, path)
+      rsx.debug('Copying file {path} to {dest}')
+      cp(path, dest)
     }
   })
 }
 
 func build(output) {
-  wd := os.getwd()
-  dir := os.mkdir_temp("/tmp", "rsx")
-  rsx.debug("Building in " + dir)
+  tmpdir := os.mkdir_temp("/tmp", "rsx")
+  rsx.debug('Building in {tmpdir}...')
 
-  os.write_file(filepath.join(dir, "/main.go"), mainGo)
-  os.write_file(filepath.join(dir, "/main.risor"), os.read_file("main.risor"))
-  os.mkdir_all(filepath.join(dir, "/lib"))
-  os.write_file(filepath.join(dir, "/lib/rsx.risor"), rsxLib)
-
-  copy_libs(dir)
-
-  cd(dir)
-  exec("go", ["mod", "init", "rsxcmd"])
-  exec("go", ["mod", "tidy"])
-  exec("go", ["build", "-o", filepath.join(wd, output)])
-  if !debug {
-    os.remove_all(dir)
+  copy := {
+    "/main.go": _mainGo,
+    "/importer.go": _importerGo,
+    "/main.risor": os.read_file("main.risor"),
+    "/lib/rsx.risor": rsxLib,
   }
+
+  os.mkdir_all(filepath.join(tmpdir, "/lib"))
+
+  for k, v := range copy {
+    os.write_file(filepath.join(tmpdir, k), v)
+  }
+
+  copy_libs(tmpdir)
+  go_build(tmpdir, output)
+
+  cleanup(tmpdir)
 }
 
 cli.app({
