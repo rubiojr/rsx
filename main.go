@@ -57,7 +57,7 @@ func main() {
 		risor.WithGlobal("uuid", uuid.Module()),
 		risor.WithGlobal("_mainGo", _mainGo),
 		risor.WithGlobal("_importerGo", _importerGo),
-		risor.WithGlobal("rsxLib", _rsxLib),
+		risor.WithGlobal("_rsxLib", _rsxLib),
 	)
 	if err != nil {
 		logger.Fatal(err)

@@ -54,7 +54,7 @@ func build(output) {
     "/main.go": _mainGo,
     "/importer.go": _importerGo,
     "/main.risor": os.read_file("main.risor"),
-    "/lib/rsx.risor": rsxLib,
+    "/lib/rsx.risor": _rsxLib,
   }
 
   os.mkdir_all(filepath.join(tmpdir, "/lib"))
@@ -82,7 +82,7 @@ cli.app({
               os.mkdir(name)
               os.write_file(filepath.join(name, "main.risor"), "import rsx\n"+`rsx.log("Hello, World!")`)
               os.mkdir(filepath.join(name, "lib"))
-              os.write_file(filepath.join(name, "/lib/rsx.risor"), rsxLib)
+              os.write_file(filepath.join(name, "/lib/rsx.risor"), _rsxLib)
             },
             flags: [
                 cli.flag({
