@@ -20,8 +20,10 @@ import (
 	mjson "github.com/risor-io/risor/modules/json"
 	mnet "github.com/risor-io/risor/modules/net"
 	mos "github.com/risor-io/risor/modules/os"
+	mrand "github.com/risor-io/risor/modules/rand"
 	mregexp "github.com/risor-io/risor/modules/regexp"
 	msql "github.com/risor-io/risor/modules/sql"
+	mstrconv "github.com/risor-io/risor/modules/strconv"
 	mstrings "github.com/risor-io/risor/modules/strings"
 	mtime "github.com/risor-io/risor/modules/time"
 	muuid "github.com/risor-io/risor/modules/uuid"
@@ -85,6 +87,8 @@ func main() {
 		risor.WithGlobal("color", mcolor.Module()),
 		risor.WithGlobal("bcrypt", mbcrypt.Module()),
 		risor.WithGlobal("carbon", mcarbon.Module()),
+		risor.WithGlobal("rand", mrand.Module()),
+		risor.WithGlobal("atoi", mstrconv.Module()),
 		risor.WithGlobal("_mainGo", _mainGo),
 		risor.WithGlobal("_importerGo", _importerGo),
 		risor.WithGlobal("_rsxLib", _rsxLib),
