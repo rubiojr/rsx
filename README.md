@@ -33,8 +33,10 @@ Ensure that your Go bin directory is in your PATH.
    cd myapp
    ```
 
-2. Edit the main script (`main.risor`):
+2. Edit the main script (`main.risor`) to add your code:
    ```risor
+   import rsx
+
    rsx.log("Hello from Risor!")
    ```
 
