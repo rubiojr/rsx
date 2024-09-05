@@ -2,6 +2,9 @@
 
 `rsx` can package your [Risor](https://risor.io) scripts in a Go binary, so you can distribute your app without dependencies.
 
+> [!WARNING]
+> rsx is currently Alpha quality.
+
 ## Install
 
 ```
