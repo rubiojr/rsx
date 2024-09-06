@@ -1,5 +1,10 @@
 import os
 import regexp
+import exec
+
+func shell(command) {
+  exec("bash", ["-c", command])
+}
 
 func log(msg) {
   print(msg)
@@ -9,13 +14,6 @@ func debug(msg) {
   if os.getenv("RSX_DEBUG") == "1" {
     print(msg)
   }
-}
-
-func replace_file(file, rgxp, repl) {
-  f := os.read_file(file)
-  r := regexp.compile(rgxp)
-  r.replace_all(f, repl)
-  os.write_file(file, f)
 }
 
 func env(key, def) {
@@ -40,6 +38,21 @@ func lines(content) {
   }
   return content.split("\n")
 }
+
+// Replace an occurrence of a regular expression in a file or string.
+func replace_in(target, rgxp, repl) {
+  l := []
+  r := regexp.compile(rgxp)
+  lines(target).each(func(line){
+    if r.match(line) {
+      l.append(r.replace_all(line, repl))
+    } else {
+      l.append(line)
+    }
+  })
+  os.write_file(target, strings.join(l, "\n"))
+}
+
 
 func grep(target, regex) {
   l := []
