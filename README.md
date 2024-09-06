@@ -45,6 +45,9 @@ Ensure that your Go bin directory is in your PATH.
    rsx build
    ```
 
+> [!NOTE]
+> rbx runs `go build` under the hood, so you can pass any additional environment variables to it, like `GOOS`, `GOARCH`, etc.
+
 4. Run your application:
    ```bash
    ./myapp
