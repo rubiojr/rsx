@@ -11,6 +11,7 @@ func cleanup(dir) {
   rsx.debug('Cleaning up {dir}')
   if debug {
     rsx.debug('Debug enabled, not removing temp dir {dir}')
+    return
   }
   os.remove_all(dir)
 }
@@ -31,7 +32,7 @@ func go_build(dir, output) {
   exec("go", ["mod", "tidy"])
 
   rsx.debug('Running go build -o {bin_path}...')
-  exec("go", ["build", "-o", bin_path])
+  exec("go", ["build", "-ldflags", "-s -w", "-o", bin_path])
 }
 
 func copy_libs(dir) {
