@@ -17,3 +17,37 @@ func replace_file(file, rgxp, repl) {
   r.replace_all(f, repl)
   os.write_file(file, f)
 }
+
+func env(key, def) {
+  v := os.getenv(key)
+  if v == "" {
+    v = def
+  }
+  return v
+}
+
+func is_file(target) {
+  try(func() { f := os.stat(target); !f.is_dir }, false)
+}
+
+func is_dir(target) {
+  try(func() { f := os.stat(target); f.is_dir }, false)
+}
+
+func lines(content) {
+  if is_file(content) {
+    return string(os.read_file(content)).split("\n")
+  }
+  return content.split("\n")
+}
+
+func grep(target, regex) {
+  l := []
+  lines(target).each(func(line){
+    if regexp.match(regex, line) {
+      l.append(line)
+    }
+  })
+
+  return l
+}
