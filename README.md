@@ -73,7 +73,8 @@ RSX comes with a built-in `rsx` module providing basic functionality. For availa
 During development, you can run your Risor scripts directly:
 
 ```bash
-risor --modules lib main.risor
+# needs main.risor as the main entry point
+rsx run
 ```
 
 This allows for faster iteration without needing to rebuild the binary.
