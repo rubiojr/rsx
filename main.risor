@@ -77,20 +77,29 @@ cli.app({
         cli.command({
             args: true,
             name: "new",
-            description: "Build the current directory",
+            description: "Create a new RSX project directory",
             action: func(ctx) {
               name := ctx.args()[0]
               os.mkdir(name)
               os.write_file(filepath.join(name, "main.risor"), "import rsx\n"+`rsx.log("Hello, World!")`)
               os.mkdir(filepath.join(name, "lib"))
               os.write_file(filepath.join(name, "/lib/rsx.risor"), _rsxLib)
+              print('Created new RSX project in {name}. cd {name} to get started.')
+              print("- 'rsx build' to build the project.")
+              print("- 'risor --modules lib main.risor' to run the project.")
             },
-            flags: [
-                cli.flag({
-                    name: "debug",
-                    type: "bool",
-                }),
-            ],
+        }),
+        cli.command({
+            args: false,
+            name: "seed",
+            description: "Seed the current directory",
+            action: func(ctx) {
+              os.write_file("main.risor", "import rsx\n"+`rsx.log("Hello, World!")`)
+              os.mkdir_all("lib")
+              os.write_file("lib/rsx.risor", _rsxLib)
+              print("- 'rsx build' to build the project.")
+              print("- 'risor --modules lib main.risor' to run the project.")
+            },
         }),
         cli.command({
             args: true,
