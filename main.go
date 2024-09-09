@@ -30,6 +30,7 @@ import (
 	muuid "github.com/risor-io/risor/modules/uuid"
 	myaml "github.com/risor-io/risor/modules/yaml"
 	ros "github.com/risor-io/risor/os"
+	"github.com/rubiojr/rsx/modules/rsxmod"
 )
 
 //go:embed lib/*.risor
@@ -91,6 +92,7 @@ func main() {
 		risor.WithGlobal("carbon", mcarbon.Module()),
 		risor.WithGlobal("rand", mrand.Module()),
 		risor.WithGlobal("atoi", mstrconv.Module()),
+		risor.WithGlobal("rsxmod", rsxmod.Module()),
 		risor.WithGlobal("_mainGo", _mainGo),
 		risor.WithGlobal("_goMod", _goMod),
 		risor.WithGlobal("_goSum", _goSum),

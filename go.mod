@@ -2,9 +2,7 @@ module github.com/rubiojr/rsx
 
 go 1.22.6
 
-replace github.com/risor-io/risor/modules/time => github.com/rubiojr/risor/modules/time v0.0.0-20240909123954-13d660d13916
-
-replace github.com/risor-io/risor => github.com/rubiojr/risor v0.0.0-20240909123954-13d660d13916
+replace github.com/risor-io/risor => github.com/rubiojr/risor v0.0.0-20240909172725-ff68938450f7
 
 require (
 	github.com/charmbracelet/log v0.4.0
