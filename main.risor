@@ -114,6 +114,13 @@ cli.app({
         }),
         cli.command({
             args: true,
+            // This command is handled from the Go side.
+            // It's here to provide a better help message.
+            name: "run",
+            description: "Run main.risor from the current directory",
+        }),
+        cli.command({
+            args: true,
             name: "build",
             description: "Build the current directory",
             action: func(ctx) {

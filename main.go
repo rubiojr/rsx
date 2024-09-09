@@ -66,15 +66,10 @@ func main() {
 	}
 
 	ctx := context.Background()
-	importerOpt := risor.WithImporter(newEmbedImporter())
 	//cfg := risor.NewConfig()
-
-	ros.SetScriptArgs(os.Args)
-	_, err := risor.Eval(
-		ctx,
-		_mainRsr,
-		importerOpt,
+	opts := []risor.Option{
 		risor.WithConcurrency(),
+		risor.WithLocalImporter("lib"),
 		//risor.WithGlobals(cfg.Globals()),
 		risor.WithGlobal("cli", mcli.Module()),
 		risor.WithGlobal("sql", msql.Module()),
@@ -100,7 +95,27 @@ func main() {
 		risor.WithGlobal("_goMod", _goMod),
 		risor.WithGlobal("_goSum", _goSum),
 		risor.WithGlobal("_importerGo", _importerGo),
-		risor.WithGlobal("_rsxLib", _rsxLib),
+		risor.WithGlobal("_rsxLib", _rsxLib)}
+
+	if len(os.Args) > 1 && os.Args[1] == "run" {
+		m, err := os.ReadFile("main.risor")
+		if err != nil {
+			logger.Fatal("error reading main.risor")
+		}
+		_mainRsr = string(m)
+		opts = append(opts, risor.WithLocalImporter("lib"))
+		if len(os.Args) > 2 {
+			ros.SetScriptArgs(append([]string{"main.risor"}, os.Args[2:]...))
+		}
+	} else {
+		opts = append(opts, risor.WithImporter(newEmbedImporter()))
+		ros.SetScriptArgs(os.Args)
+	}
+
+	_, err := risor.Eval(
+		ctx,
+		_mainRsr,
+		opts...,
 	)
 	if err != nil {
 		logger.Fatal(err)
