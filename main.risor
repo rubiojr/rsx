@@ -25,8 +25,8 @@ func go_build(dir, output) {
   cd(dir)
   rsx.debug('Working directory {dir}')
 
-  rsx.debug('Running go mod init rsxmod')
-  exec("go", ["mod", "init", "rsxmod"])
+  //rsx.debug('Running go mod init rsxmod')
+  //exec("go", ["mod", "init", "rsxmod"])
 
   rsx.debug('Running go mod tidy')
   exec("go", ["mod", "tidy"])
@@ -52,6 +52,8 @@ func build(output) {
   rsx.debug('Building in {tmpdir}...')
 
   copy := {
+    "/go.mod": _goMod,
+    "/go.sum": _goSum,
     "/main.go": _mainGo,
     "/importer.go": _importerGo,
     "/main.risor": os.read_file("main.risor"),

@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/charmbracelet/log"
+	_ "github.com/mattn/go-sqlite3"
 	"github.com/risor-io/risor"
 	mbase64 "github.com/risor-io/risor/modules/base64"
 	mbcrypt "github.com/risor-io/risor/modules/bcrypt"
@@ -45,6 +46,12 @@ var _mainGo string
 
 //go:embed importer.go
 var _importerGo string
+
+//go:embed go.mod
+var _goMod string
+
+//go:embed go.sum
+var _goSum string
 
 func main() {
 	logger := log.NewWithOptions(os.Stderr, log.Options{
@@ -90,6 +97,8 @@ func main() {
 		risor.WithGlobal("rand", mrand.Module()),
 		risor.WithGlobal("atoi", mstrconv.Module()),
 		risor.WithGlobal("_mainGo", _mainGo),
+		risor.WithGlobal("_goMod", _goMod),
+		risor.WithGlobal("_goSum", _goSum),
 		risor.WithGlobal("_importerGo", _importerGo),
 		risor.WithGlobal("_rsxLib", _rsxLib),
 	)
