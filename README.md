@@ -60,9 +60,27 @@ Ensure that your Go bin directory is in your PATH.
 - `lib/`: Directory for additional Risor modules.
 - `lib/rsx.risor`: Built-in RSX module with utility functions.
 
-## Adding Custom Modules
+## Adding custom Risor modules
 
 Place any additional `.risor` files in the `lib` directory. They will be automatically available at runtime.
+
+## Adding custom Risor Go modules
+
+External Risor Go modules are supported. To add a custom Go module, follow these steps:
+
+Add a `.modules` file in the root of your project with the following format:
+
+```plaintext
+github.com/rubiojr/risor-modules/hello
+```
+
+Where `github.com/rubiojr/risor-modules/hello` is the Go module path.
+
+Then, run `rsx build` to build the binary with the custom module.
+
+Risor Go modules are regular Go modules that extend Risor functionality with new built-ins, like https://github.com/rubiojr/risor-modules/hello.
+
+See related official documentation at https://risor.io/docs/contributing_modules.
 
 ## The RSX Module
 
@@ -78,6 +96,10 @@ rsx run
 ```
 
 This allows for faster iteration without needing to rebuild the binary.
+
+> [!NOTE]
+> Custom native Go modules not built into RSX are not avaible with `rsx run`.
+> If you are using a custom module, you will need to build the binary with `rsx build` to test it.
 
 ## Contributing
 

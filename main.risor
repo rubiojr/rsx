@@ -28,6 +28,9 @@ func go_build(dir, output) {
   //rsx.debug('Running go mod init rsxmod')
   //exec("go", ["mod", "init", "rsxmod"])
 
+  rsx.debug('Running go generate')
+  exec("go", ["run", "generator.go"])
+
   rsx.debug('Running go mod tidy')
   exec("go", ["mod", "tidy"])
 
@@ -58,6 +61,14 @@ func build(output) {
     "/importer.go": _importerGo,
     "/main.risor": os.read_file("main.risor"),
     "/lib/rsx.risor": _rsxLib,
+    "/generator.go": _generatorGo,
+    "/.modules": _rsModules,
+  }
+
+  if rsx.is_file(".modules") {
+    rsx.debug('Found custom .modules file, appending')
+    content := string(os.read_file(".modules"))
+    copy["/.modules"] = copy["/.modules"]+content
   }
 
   os.mkdir_all(filepath.join(tmpdir, "/lib"))
