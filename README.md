@@ -72,9 +72,10 @@ Add a `.modules` file in the root of your project with the following format:
 
 ```plaintext
 github.com/rubiojr/risor-modules/hello
+github.com/rubiojr/risor-modules/onemore
 ```
 
-Where `github.com/rubiojr/risor-modules/hello` is the Go module path.
+Where each line is the Go module path used in a Go import statement.
 
 Then, run `rsx build` to build the binary with the custom module.
 
