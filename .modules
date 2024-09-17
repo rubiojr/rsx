@@ -15,6 +15,7 @@ regexp
 sql
 strconv
 strings
+tablewriter
 time
 uuid
 yaml

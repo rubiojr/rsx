@@ -20,12 +20,13 @@ import (
 	rsmsql "github.com/risor-io/risor/modules/sql"
 	rsmstrconv "github.com/risor-io/risor/modules/strconv"
 	rsmstrings "github.com/risor-io/risor/modules/strings"
+	rsmtablewriter "github.com/risor-io/risor/modules/tablewriter"
 	rsmtime "github.com/risor-io/risor/modules/time"
 	rsmuuid "github.com/risor-io/risor/modules/uuid"
 	rsmyaml "github.com/risor-io/risor/modules/yaml"
 )
 
 func globalModules() map[string]any {
-	a := map[string]any{"fmt": rsmfmt.Module(), "json": rsmjson.Module(), "sql": rsmsql.Module(), "cli": rsmcli.Module(), "color": rsmcolor.Module(), "exec": rsmexec.Module(), "http": rsmhttp.Module(), "regexp": rsmregexp.Module(), "strconv": rsmstrconv.Module(), "time": rsmtime.Module(), "yaml": rsmyaml.Module(), "bcrypt": rsmbcrypt.Module(), "os": rsmos.Module(), "rand": rsmrand.Module(), "net": rsmnet.Module(), "strings": rsmstrings.Module(), "uuid": rsmuuid.Module(), "base64": rsmbase64.Module(), "bytes": rsmbytes.Module(), "carbon": rsmcarbon.Module()}
+	a := map[string]any{"base64": rsmbase64.Module(), "bytes": rsmbytes.Module(), "http": rsmhttp.Module(), "sql": rsmsql.Module(), "exec": rsmexec.Module(), "fmt": rsmfmt.Module(), "rand": rsmrand.Module(), "tablewriter": rsmtablewriter.Module(), "strings": rsmstrings.Module(), "yaml": rsmyaml.Module(), "bcrypt": rsmbcrypt.Module(), "carbon": rsmcarbon.Module(), "color": rsmcolor.Module(), "json": rsmjson.Module(), "strconv": rsmstrconv.Module(), "time": rsmtime.Module(), "uuid": rsmuuid.Module(), "cli": rsmcli.Module(), "net": rsmnet.Module(), "os": rsmos.Module(), "regexp": rsmregexp.Module()}
 	return a
 }

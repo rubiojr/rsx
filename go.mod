@@ -14,7 +14,6 @@ require (
 	github.com/risor-io/risor/modules/cli v1.6.0
 	github.com/risor-io/risor/modules/sql v1.6.0
 	github.com/risor-io/risor/modules/uuid v1.6.0
-	github.com/rubiojr/risor-modules/hello v0.0.0-20240912173900-adb9f55efb61
 )
 
 require (
@@ -37,6 +36,7 @@ require (
 	github.com/microsoft/go-mssqldb v1.7.0 // indirect
 	github.com/muesli/reflow v0.3.0 // indirect
 	github.com/muesli/termenv v0.15.2 // indirect
+	github.com/olekukonko/tablewriter v0.0.5 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/urfave/cli/v2 v2.27.1 // indirect
