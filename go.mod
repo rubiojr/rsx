@@ -1,14 +1,12 @@
 module github.com/rubiojr/rsx
 
-go 1.23.1
-
-replace github.com/risor-io/risor => github.com/rubiojr/risor v0.0.0-20240909172725-ff68938450f7
+go 1.23
 
 require (
 	github.com/charmbracelet/log v0.4.0
 	github.com/dave/jennifer v1.7.1
 	github.com/mattn/go-sqlite3 v1.14.23
-	github.com/risor-io/risor v1.6.0
+	github.com/risor-io/risor v1.6.1-0.20240927135333-245e7b83abf4
 	github.com/risor-io/risor/modules/bcrypt v1.6.0
 	github.com/risor-io/risor/modules/carbon v1.6.0
 	github.com/risor-io/risor/modules/cli v1.6.0
