@@ -1,0 +1,148 @@
+import color
+import exec
+import regexp
+
+__fatal := false
+__raises := false
+
+_red := color.color(color.fg_red, color.bold)
+_green := color.color(color.fg_green, color.bold)
+
+failed_is_fatal := func(b) {
+  __fatal = b
+}
+
+_last_error := nil
+failed_raises := func() {
+  __raises = true
+}
+failed_does_not_raise := func() {
+  __raises = false
+}
+
+raised_error := errors.new("error raised")
+
+func exit_if_fatal() {
+  if __fatal {
+    os.exit(1)
+  }
+}
+
+// Print a message in green.
+//
+// desc: the test description
+func print_ok(desc) {
+  print(_green.sprintf('%s:', "  ok"), desc)
+}
+
+// Print a message in red.
+//
+// desc: the test description
+func print_fail(desc) {
+  if __raises {
+    if _last_error == nil {
+      error(raised_error)
+    }
+    error(_last_error)
+    _last_error = nil
+  }
+  print(_red.sprintf('%s:', "fail"), desc)
+  exit_if_fatal()
+}
+
+// Assert that a condition is true.
+//
+// desc: the test description
+// cond: the condition to check (boolean)
+func is_true(desc, cond){
+  if !cond {
+    print_fail(desc)
+  } else {
+    print_ok(desc)
+  }
+}
+
+func equals(desc, o1, o2) {
+  if o1 == o2 {
+    print_ok(desc)
+  } else {
+    print_fail(desc + ' (expected: {o1}, got: {o2})')
+  }
+}
+
+// Assert a condition rasies an error.
+//
+// desc: the test description
+// fn: the function that should raise an error
+// err: the error that should be raised
+func raises(desc, fn, err) {
+  happened := false
+  try(fn, func(e) {
+    happened = true
+    _last_error = e
+    if e != err{
+      print_fail(desc + '(expected: {err}, got: {e})')
+    } else {
+      print_ok(desc)
+    }
+  })
+  if !happened {
+    error(sprintf("%s %s", _red.sprintf('%s:', "fail"), desc))
+  }
+}
+
+// Assert a condition does not raise an error.
+//
+// desc: the test description
+// fn: the function that should not raise an error
+func nothing_raised(desc, fn) {
+  happened := nil
+  try(fn, func(e) {
+    happened = e
+  })
+  if happened {
+    error(sprintf("%s %s", _red.sprintf('%s:', "fail"), desc))
+  } else {
+    print_ok(desc)
+  }
+}
+
+// Assert that cmd output equals a expected string.
+//
+// desc: the test description
+// cmd: the command to run
+// expected: the expected output
+func stdout_equals(desc, cmd, expected) {
+  tokens := cmd.split(" ")
+  bin := tokens[0]
+  args := []
+  if len(tokens) > 1 {
+    args.extend(tokens[1:])
+  }
+  out := exec(bin, args).stdout
+  if out != expected {
+    print_fail(desc + ' (expected: {expected}, got: {out})')
+  } else {
+    print_ok(desc)
+  }
+}
+
+// Assert that cmd output matches a regular expression.
+//
+// desc: the test description
+// cmd: the command to run
+// reg: the regular expression to match
+func stdout_matches(desc, cmd, reg) {
+  tokens := cmd.split(" ")
+  bin := tokens[0]
+  args := []
+  if len(tokens) > 1 {
+    args.extend(tokens[1:])
+  }
+  out := exec(bin, args).stdout
+  if regexp.match(reg, out) {
+    print_ok(desc)
+  } else {
+    print_fail(desc + '(output {out} does not match {reg})')
+  }
+}

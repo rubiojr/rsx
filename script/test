@@ -1,0 +1,5 @@
+#!/bin/sh
+
+go build
+
+risor --modules tests/lib tests/tests.risor
