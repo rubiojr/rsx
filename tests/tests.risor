@@ -7,5 +7,5 @@ tmp_dir := uuid()
 test.stdout_matches(
   'rsx new creates temp dir {tmp_dir}',
   './rsx new /tmp/rsxtmp-{tmp_dir}',
-  'Created new RSX project in /tmp/rsxtmp-{tmp_dir}'
+  'Created new RSX project in /tmp/rsxtmp-{tmp_dir}',
 )

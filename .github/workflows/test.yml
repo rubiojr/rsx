@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: applejag/setup-risor@v0
+      #- uses: applejag/setup-risor@v0
       - name: Setup Go ${{ matrix.go-version }}
         uses: actions/setup-go@v5
         with:
@@ -29,6 +29,14 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
+
+      - uses: actions/checkout@v4
+        with:
+          repository: 'risor-io/risor'
+          ref: 'd3d503b85ba64d155606b61dbc25b23529a785fa'
+          path: 'risor'
+      - name: Install risor
+        run: cd risor/cmd/risor && go install .
 
       - name: Run tests
         run: ./script/test
