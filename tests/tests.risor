@@ -1,11 +1,32 @@
 import test
 import uuid
+import os
+import filepath
 
 test.stdout_matches("rsx without argument returns help", "./rsx", "^NAME:.*")
 
-tmp_dir := uuid()
-test.stdout_matches(
-  'rsx new creates temp dir {tmp_dir}',
-  './rsx new /tmp/rsxtmp-{tmp_dir}',
-  'Created new RSX project in /tmp/rsxtmp-{tmp_dir}',
-)
+test.with_temp_dir(func(tmp_dir) {
+  dir := filepath.join(tmp_dir, "rsx-new")
+  test.stdout_matches(
+    'rsx new creates temp dir {dir}',
+    './rsx new {dir}',
+    'Created new RSX project in {dir}',
+  )
+  test.is_dir('{dir} was created', dir)
+})
+
+test.with_temp_dir(func(tmp_dir) {
+  rsx := filepath.join(os.getwd(), "rsx")
+  cd(tmp_dir)
+  test.stdout_matches(
+    'rsx new creates test project',
+    '{rsx} new test',
+    'Created new RSX project in test',
+  )
+  cd("test")
+  test.stdout_equals(
+    'rsx builds the test project',
+    '{rsx} build',
+    "",
+  )
+})

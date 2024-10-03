@@ -1,6 +1,7 @@
 import color
 import exec
 import regexp
+import os
 
 __fatal := false
 __raises := false
@@ -13,14 +14,16 @@ failed_is_fatal := func(b) {
 }
 
 _last_error := nil
+// internal use only, to self-test this library
 failed_raises := func() {
   __raises = true
 }
+// internal use only, to self-test this library
 failed_does_not_raise := func() {
   __raises = false
 }
 
-raised_error := errors.new("error raised")
+_raised_error := errors.new("error raised")
 
 func exit_if_fatal() {
   if __fatal {
@@ -32,7 +35,9 @@ func exit_if_fatal() {
 //
 // desc: the test description
 func print_ok(desc) {
-  print(_green.sprintf('%s:', "  ok"), desc)
+  if desc != "" {
+    print(_green.sprintf('%s:', "  ok"), desc)
+  }
 }
 
 // Print a message in red.
@@ -40,11 +45,7 @@ func print_ok(desc) {
 // desc: the test description
 func print_fail(desc) {
   if __raises {
-    if _last_error == nil {
-      error(raised_error)
-    }
-    error(_last_error)
-    _last_error = nil
+    error(desc)
   }
   print(_red.sprintf('%s:', "fail"), desc)
   exit_if_fatal()
@@ -75,19 +76,21 @@ func equals(desc, o1, o2) {
 // desc: the test description
 // fn: the function that should raise an error
 // err: the error that should be raised
-func raises(desc, fn, err) {
-  happened := false
-  try(fn, func(e) {
-    happened = true
-    _last_error = e
+func raises(desc, fn, err="") {
+  processed := false
+  o := try(fn, func(e) {
+    processed = true
     if e != err{
       print_fail(desc + '(expected: {err}, got: {e})')
     } else {
       print_ok(desc)
     }
+  }, func(e) {
+    print_ok(desc)
   })
-  if !happened {
-    error(sprintf("%s %s", _red.sprintf('%s:', "fail"), desc))
+
+  if o == nil && !processed {
+    print(sprintf("%s %s", _red.sprintf('%s:', "fail"), desc))
   }
 }
 
@@ -145,4 +148,42 @@ func stdout_matches(desc, cmd, reg) {
   } else {
     print_fail(desc + '(output {out} does not match {reg})')
   }
+}
+
+// Assert that a path is a directory.
+//
+// desc: the test description
+// path: the path to check
+func is_dir(desc, path) {
+  ok := try(func() { f := os.stat(path); f.is_dir }, false)
+  if ok {
+    print_ok(desc)
+  } else {
+    print_fail(desc)
+  }
+}
+
+// Assert that a path is a file.
+//
+// desc: the test description
+// path: the path to check
+func is_file(desc, path) {
+  ok := try(func() { f := os.stat(path); !f.is_dir }, false)
+  if ok {
+    print_ok(desc)
+  } else {
+    print_fail(desc)
+    //error(raised_error)
+  }
+}
+
+// Create a temporary directory and run a function with it.
+// The directory created is automatically removed after the function is run.
+//
+// fn: the function to run
+func with_temp_dir(fn) {
+  tmp_dir := filepath.join(os.temp_dir(), uuid())
+  os.mkdir_all(tmp_dir)
+  defer os.remove_all(tmp_dir)
+  return fn(tmp_dir)
 }
