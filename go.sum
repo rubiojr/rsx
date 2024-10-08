@@ -80,6 +80,8 @@ github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 h1:Jamvg5psRI
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/risor-io/risor v1.6.1-0.20240927181516-d3d503b85ba6 h1:M0lQKK44496ZcsvKtBKNpJRf49ZP9//rbZ3/HSZAtlI=
 github.com/risor-io/risor v1.6.1-0.20240927181516-d3d503b85ba6/go.mod h1:aDLqChiRcPwIbD6gvaNdpXJiKRxZ8w6bUAKIcDEB3q0=
+github.com/risor-io/risor v1.6.1-0.20241002191325-24db18d54338 h1:B63XV/irMmTBB/sIoSnWVz4SuRYEmjDyjvtN/J1Lago=
+github.com/risor-io/risor v1.6.1-0.20241002191325-24db18d54338/go.mod h1:aDLqChiRcPwIbD6gvaNdpXJiKRxZ8w6bUAKIcDEB3q0=
 github.com/risor-io/risor/modules/bcrypt v1.6.0 h1:EJo7gyoSAHiIlsq2B9aAK9mmyYufgr/ivpBOv4LNNHk=
 github.com/risor-io/risor/modules/bcrypt v1.6.0/go.mod h1:TweqJyXNtzAKvAcX5nC5A152ZjKaw5GEFUskKvkpa7o=
 github.com/risor-io/risor/modules/bcrypt v1.6.1-0.20240927181516-d3d503b85ba6 h1:Tdv16pWyE/3Irdmn46KyU1/IjbLpUirggktmU8akDY8=

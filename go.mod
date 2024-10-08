@@ -6,7 +6,7 @@ require (
 	github.com/charmbracelet/log v0.4.0
 	github.com/dave/jennifer v1.7.1
 	github.com/mattn/go-sqlite3 v1.14.23
-	github.com/risor-io/risor v1.6.1-0.20240927181516-d3d503b85ba6
+	github.com/risor-io/risor v1.6.1-0.20241002191325-24db18d54338
 	github.com/risor-io/risor/modules/bcrypt v1.6.1-0.20240927181516-d3d503b85ba6
 	github.com/risor-io/risor/modules/carbon v1.6.1-0.20240927181516-d3d503b85ba6
 	github.com/risor-io/risor/modules/cli v1.6.1-0.20240927181516-d3d503b85ba6
