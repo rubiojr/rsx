@@ -96,6 +96,12 @@ During development, you can run your Risor scripts directly:
 rsx run
 ```
 
+Or you can use `eval` also:
+
+```bash
+rsx eval main.risor
+```
+
 This allows for faster iteration without needing to rebuild the binary.
 
 > [!NOTE]

@@ -3,30 +3,76 @@ import uuid
 import os
 import filepath
 
+_rsxbin := filepath.join(os.getwd(), "rsx")
+
 test.stdout_matches("rsx without argument returns help", "./rsx", "^NAME:.*")
 
 test.with_temp_dir(func(tmp_dir) {
   dir := filepath.join(tmp_dir, "rsx-new")
   test.stdout_matches(
     'rsx new creates temp dir {dir}',
-    './rsx new {dir}',
+    '{_rsxbin} new {dir}',
     'Created new RSX project in {dir}',
   )
   test.is_dir('{dir} was created', dir)
 })
 
 test.with_temp_dir(func(tmp_dir) {
-  rsx := filepath.join(os.getwd(), "rsx")
   cd(tmp_dir)
   test.stdout_matches(
     'rsx new creates test project',
-    '{rsx} new test',
+    '{_rsxbin} new test',
     'Created new RSX project in test',
   )
   cd("test")
   test.stdout_equals(
     'rsx builds the test project',
-    '{rsx} build',
+    '{_rsxbin} build',
     "",
+  )
+})
+
+test.with_temp_dir(func(tmp_dir) {
+  cd(tmp_dir)
+  test.stdout_matches(
+    'rsx new creates test project',
+    '{_rsxbin} new test',
+    'Created new RSX project in test',
+  )
+  cd("test")
+  test.stdout_equals(
+    'rsx eval runs main.risor',
+    '{_rsxbin} eval main.risor',
+    "Hello, World!\n",
+  )
+})
+
+test.with_temp_dir(func(tmp_dir) {
+  cd(tmp_dir)
+  test.stdout_matches(
+    'rsx new creates test project',
+    '{_rsxbin} new test',
+    'Created new RSX project in test',
+  )
+  cd("test")
+  test.raises(
+    'rsx eval without argument errors',
+    func() {
+      exec(_rsxbin, ["eval"])
+    }, errors.new("exit status 1"))
+})
+
+test.with_temp_dir(func(tmp_dir) {
+  cd(tmp_dir)
+  test.stdout_matches(
+    'rsx new creates test project',
+    '{_rsxbin} new test',
+    'Created new RSX project in test',
+  )
+  cd("test")
+  test.stdout_equals(
+    'rsx run runs main.risor',
+    '{_rsxbin} run',
+    "Hello, World!\n",
   )
 })

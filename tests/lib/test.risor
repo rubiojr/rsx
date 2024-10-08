@@ -63,6 +63,18 @@ func is_true(desc, cond){
   }
 }
 
+// Assert that a condition is false.
+//
+// desc: the test description
+// cond: the condition to check (boolean)
+func is_false(desc, cond){
+  if cond {
+    print_fail(desc)
+  } else {
+    print_ok(desc)
+  }
+}
+
 func equals(desc, o1, o2) {
   if o1 == o2 {
     print_ok(desc)
