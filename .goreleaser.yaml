@@ -22,6 +22,8 @@ builds:
       - linux
       - windows
       - darwin
+    tags:
+      - fts5
 
 archives:
   - format: tar.gz
