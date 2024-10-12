@@ -64,3 +64,58 @@ func grep(target, regex) {
 
   return l
 }
+
+// Load a module from a github repository
+//
+// opts: Options available:
+//  - force: force module download if present (false, bool)
+//  - branch: repository branch to use (main, string)
+//  - install_path: path to install the module ($HOME/.local/share/risor/modules, string)
+__module_dir := filepath.join(getenv("HOME"), ".local/share/risor/modules")
+func load(path, opts) {
+  install_path := opts.get("install_path", __module_dir)
+  os.mkdir_all(install_path)
+
+  debug("install path: "+install_path)
+
+  branch := opts.get("branch", "main")
+  debug("branch: "+branch)
+
+  force := opts.get("force", false)
+  if !regexp.match(`gh:(\w|-|_)+\/(\w|-|_)+\/.*`, path) {
+    error("invalid path")
+  }
+  nwo := strings.split(path, "/")[0:2]
+  nwo = strings.join(nwo, "/").replace_all("gh:", "")
+  debug("nwo: "+nwo)
+
+  lib_path := strings.split(path, "/")[2:]
+  lib_path = strings.join(lib_path, "/")
+  lib_path = strings.trim_suffix(lib_path, ".risor")
+  lib_path = lib_path + ".risor"
+  debug("library path: "+lib_path)
+
+  dest := filepath.join(install_path, filepath.base(path))
+  dest = strings.trim_suffix(dest, ".risor")
+  dest = dest + ".risor"
+
+  if is_file(dest) && !force {
+    debug(sprintf("%s already exists, ignoring", filepath.base(dest)))
+    return false
+  }
+
+  if is_file(dest) && force {
+    debug(sprintf("library %s, force requested", filepath.base(dest)))
+  }
+
+  resp := fetch('https://raw.githubusercontent.com/{nwo}/refs/heads/{branch}/{lib_path}')
+  if resp.status_code != 200 {
+    error('failed to fetch the library from {path}, status code {resp.status_code}')
+  }
+  f := os.create(dest)
+  defer f.close()
+
+  f.write(resp.text())
+  debug(sprintf("library %s installed", filepath.base(dest)))
+  return true
+}
