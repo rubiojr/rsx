@@ -40,6 +40,22 @@ test.with_temp_dir(func(tmp_dir) {
     'Created new RSX project in test',
   )
   cd("test")
+  os.remove_all("lib")
+  test.stdout_equals(
+    'rsx builds the test project without lib',
+    '{_rsxbin} build',
+    "",
+  )
+})
+
+test.with_temp_dir(func(tmp_dir) {
+  cd(tmp_dir)
+  test.stdout_matches(
+    'rsx new creates test project',
+    '{_rsxbin} new test',
+    'Created new RSX project in test',
+  )
+  cd("test")
   test.stdout_equals(
     'rsx eval runs main.risor',
     '{_rsxbin} eval main.risor',
