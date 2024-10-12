@@ -40,6 +40,11 @@ func go_build(dir, output) {
 }
 
 func copy_libs(dir) {
+  if !rsx.is_dir("lib") {
+    rsx.debug('No lib directory found')
+    return
+  }
+
   filepath.walk_dir("lib", func(path, dir_entry, err) {
     if dir_entry.type == "regular" {
       dest := filepath.join(dir, path)
