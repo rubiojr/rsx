@@ -82,8 +82,6 @@ github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 h1:Jamvg5psRI
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/reugn/go-quartz v0.13.0 h1:0eMxvj28Qu1npIDdN9Mzg9hwyksGH6XJt4Cz0QB8EUk=
 github.com/reugn/go-quartz v0.13.0/go.mod h1:0ghKksELp8MJ4h84T203aTHRF3Kug5BrxEW3ErBvhzY=
-github.com/risor-io/risor v1.6.1-0.20241002191325-24db18d54338 h1:B63XV/irMmTBB/sIoSnWVz4SuRYEmjDyjvtN/J1Lago=
-github.com/risor-io/risor v1.6.1-0.20241002191325-24db18d54338/go.mod h1:aDLqChiRcPwIbD6gvaNdpXJiKRxZ8w6bUAKIcDEB3q0=
 github.com/risor-io/risor/modules/bcrypt v1.6.1-0.20240927181516-d3d503b85ba6 h1:Tdv16pWyE/3Irdmn46KyU1/IjbLpUirggktmU8akDY8=
 github.com/risor-io/risor/modules/bcrypt v1.6.1-0.20240927181516-d3d503b85ba6/go.mod h1:opSc0wsq4BJptlZgr/oq4a3lFoItjPNlzEZ48gvA4Rk=
 github.com/risor-io/risor/modules/carbon v1.6.1-0.20240927181516-d3d503b85ba6 h1:l5aavkrKBQxTIdlSD3WV0SaOrETObI1CIvr54/YkZ70=
@@ -100,6 +98,8 @@ github.com/rivo/uniseg v0.4.7 h1:WUdvkW8uEhrYfLC4ZzdpI2ztxP1I582+49Oc5Mq64VQ=
 github.com/rivo/uniseg v0.4.7/go.mod h1:FN3SvrM+Zdj16jyLfmOkMNblXMcoc8DfTHruCPUcx88=
 github.com/rogpeppe/go-internal v1.12.0 h1:exVL4IDcn6na9z1rAb56Vxr+CgyK3nn3O+epU5NdKM8=
 github.com/rogpeppe/go-internal v1.12.0/go.mod h1:E+RYuTGaKKdloAfM02xzb0FW3Paa99yedzYV+kq4uf4=
+github.com/rubiojr/risor v0.0.0-20241013222334-86e4c92c2d97 h1:cJ+yHMAskqH7368obikuf7awZJKxWSIWDvPw1i5Of6I=
+github.com/rubiojr/risor v0.0.0-20241013222334-86e4c92c2d97/go.mod h1:aDLqChiRcPwIbD6gvaNdpXJiKRxZ8w6bUAKIcDEB3q0=
 github.com/rubiojr/risor-modules/sched v0.0.0-20241013152031-4ae97bed9022 h1:Mvus0vhNOvn1djaGHGE5nVwgqHGsUmi1wlrRJPgndG0=
 github.com/rubiojr/risor-modules/sched v0.0.0-20241013152031-4ae97bed9022/go.mod h1:+BHlGcJNFbxQS+pUCRPuzjtdxDbhRIokgnkhxpyb2Q4=
 github.com/rubiojr/risor-modules/semver v0.0.0-20241013153846-92286b927743 h1:9y+x5FH3qQwJ7Pj4+g5th/5SiNJ60eKFZ6EJwsuf8Vk=

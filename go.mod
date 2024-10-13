@@ -2,6 +2,8 @@ module github.com/rubiojr/rsx
 
 go 1.22
 
+replace github.com/risor-io/risor => github.com/rubiojr/risor v0.0.0-20241013222334-86e4c92c2d97
+
 require (
 	github.com/charmbracelet/log v0.4.0
 	github.com/dave/jennifer v1.7.1

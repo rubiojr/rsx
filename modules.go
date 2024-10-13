@@ -29,6 +29,6 @@ import (
 )
 
 func globalModules() map[string]any {
-	a := map[string]any{"time": rsmtime.Module(), "base64": rsmbase64.Module(), "bytes": rsmbytes.Module(), "fmt": rsmfmt.Module(), "net": rsmnet.Module(), "rand": rsmrand.Module(), "sql": rsmsql.Module(), "cli": rsmcli.Module(), "strconv": rsmstrconv.Module(), "strings": rsmstrings.Module(), "sched": rsmsched.Module(), "semver": rsmsemver.Module(), "json": rsmjson.Module(), "yaml": rsmyaml.Module(), "regexp": rsmregexp.Module(), "tablewriter": rsmtablewriter.Module(), "bcrypt": rsmbcrypt.Module(), "carbon": rsmcarbon.Module(), "color": rsmcolor.Module(), "exec": rsmexec.Module(), "http": rsmhttp.Module(), "os": rsmos.Module(), "uuid": rsmuuid.Module()}
+	a := map[string]any{"net": rsmnet.Module(), "strings": rsmstrings.Module(), "time": rsmtime.Module(), "uuid": rsmuuid.Module(), "sched": rsmsched.Module(), "fmt": rsmfmt.Module(), "json": rsmjson.Module(), "sql": rsmsql.Module(), "strconv": rsmstrconv.Module(), "tablewriter": rsmtablewriter.Module(), "rand": rsmrand.Module(), "semver": rsmsemver.Module(), "bytes": rsmbytes.Module(), "carbon": rsmcarbon.Module(), "color": rsmcolor.Module(), "exec": rsmexec.Module(), "os": rsmos.Module(), "yaml": rsmyaml.Module(), "base64": rsmbase64.Module(), "bcrypt": rsmbcrypt.Module(), "cli": rsmcli.Module(), "http": rsmhttp.Module(), "regexp": rsmregexp.Module()}
 	return a
 }
