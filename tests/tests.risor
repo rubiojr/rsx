@@ -92,3 +92,45 @@ test.with_temp_dir(func(tmp_dir) {
     "Hello, World!\n",
   )
 })
+
+test.with_temp_dir(func(tmp_dir) {
+  cd(tmp_dir)
+  os.mkdir_all("lib")
+  f := os.create("lib/test.risor")
+  f.write("func main() { print('Hello, World!') }")
+
+  f = os.create("main.risor")
+  f.write("import test; test.main()")
+
+  test.stdout_equals(
+    'rsx eval main.risor includes lib/',
+    '{_rsxbin} eval main.risor',
+    "Hello, World!\n",
+  )
+})
+
+test.with_temp_dir(func(tmp_dir) {
+  cd(tmp_dir)
+
+  f := os.create("main.risor")
+  f.write("import rsx")
+
+  test.stdout_equals(
+    'rsx eval main.risor imports built-in rsx',
+    '{_rsxbin} eval main.risor',
+    '',
+  )
+})
+
+test.with_temp_dir(func(tmp_dir) {
+  cd(tmp_dir)
+
+  f := os.create("main.risor")
+  f.write("import rsx")
+
+  test.stdout_equals(
+    'rsx run main.risor imports built-in rsx',
+    '{_rsxbin} run main.risor',
+    '',
+  )
+})
