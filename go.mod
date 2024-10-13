@@ -12,11 +12,14 @@ require (
 	github.com/risor-io/risor/modules/cli v1.6.1-0.20240927181516-d3d503b85ba6
 	github.com/risor-io/risor/modules/sql v1.6.1-0.20240927181516-d3d503b85ba6
 	github.com/risor-io/risor/modules/uuid v1.6.1-0.20240927181516-d3d503b85ba6
+	github.com/rubiojr/risor-modules/sched v0.0.0-20241013152031-4ae97bed9022
+	github.com/rubiojr/risor-modules/semver v0.0.0-20241013153846-92286b927743
 )
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
+	github.com/blang/semver/v4 v4.0.0 // indirect
 	github.com/charmbracelet/lipgloss v0.10.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.4 // indirect
 	github.com/fatih/color v1.17.0 // indirect
@@ -35,6 +38,7 @@ require (
 	github.com/muesli/reflow v0.3.0 // indirect
 	github.com/muesli/termenv v0.15.2 // indirect
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
+	github.com/reugn/go-quartz v0.13.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/urfave/cli/v2 v2.27.4 // indirect

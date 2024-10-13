@@ -19,3 +19,5 @@ tablewriter
 time
 uuid
 yaml
+github.com/rubiojr/risor-modules/sched
+github.com/rubiojr/risor-modules/semver

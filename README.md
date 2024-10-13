@@ -11,13 +11,16 @@
 - Built-in `rsx` module for extended functionality
 - Easy project initialization and management
 - Built-in SQLite support with FTS5
-- Load external Risor native modules:
+- Ability to external Risor native modules:
 
 ```risor
 import rsx
 
 rsx.load("gh:rubiojr/risor-libs/lib/test", { branch: "main" })
 ```
+- Additional Risor Go modules included:
+  - [sched](https://github.com/rubiojr/risor-modules/tree/main/sched/sched.md): Schedule tasks
+  - [semver](https://github.com/rubiojr/risor-modules/tree/main/semver/semver.md): Semantic version parser
 
 ## Pre-requisites
 
