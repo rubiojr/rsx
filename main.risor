@@ -34,7 +34,7 @@ func go_build(dir, output) {
   rsx.debug('Running go mod tidy')
   exec("go", ["mod", "tidy"])
 
-  gb_args := ["build", "-tags", "fts5 rsx", "-ldflags", "-s -w", "-o", bin_path]
+  gb_args := ["build", "-tags", "fts5", "-ldflags", "-s -w", "-o", bin_path]
   rsx.debug('Running go {strings.join(gb_args, " ")}...')
   exec("go", gb_args)
 }
