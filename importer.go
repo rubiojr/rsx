@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
 
 	"github.com/risor-io/risor"
 	"github.com/risor-io/risor/compiler"
@@ -22,9 +23,18 @@ func newEmbedImporter() *embedImporter {
 }
 
 func (i *embedImporter) Import(ctx context.Context, name string) (*object.Module, error) {
-	source, err := _rsrLib.ReadFile("lib/" + name + ".risor")
-	if err != nil {
-		return nil, fmt.Errorf("import error: module %q not found", name)
+	// check if file name.risor exists
+	var source []byte
+	if _, err := os.Stat("lib/" + name + ".risor"); os.IsNotExist(err) {
+		source, err = _rsrLib.ReadFile("lib/" + name + ".risor")
+		if err != nil {
+			return nil, fmt.Errorf("import error: module %q not found", name)
+		}
+	} else {
+		source, err = os.ReadFile("lib/" + name + ".risor")
+		if err != nil {
+			return nil, fmt.Errorf("import error: module %q not found", name)
+		}
 	}
 
 	ast, err := parser.Parse(ctx, string(source))
