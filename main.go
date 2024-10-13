@@ -55,6 +55,7 @@ func main() {
 	//cfg := risor.NewConfig()
 	opts := []risor.Option{
 		risor.WithConcurrency(),
+		risor.WithListenersAllowed(),
 		risor.WithLocalImporter("lib"),
 		risor.WithGlobals(globalModules()),
 		risor.WithGlobal("_mainGo", _mainGo),
