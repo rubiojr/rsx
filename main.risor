@@ -34,7 +34,7 @@ func go_build(dir, output) {
   rsx.debug('Running go mod tidy')
   exec("go", ["mod", "tidy"])
 
-  gb_args := ["build", "-tags", "fts5", "-ldflags", "-s -w", "-o", bin_path]
+  gb_args := ["build", "-tags", "fts5 rsx", "-ldflags", "-s -w", "-o", bin_path]
   rsx.debug('Running go {strings.join(gb_args, " ")}...')
   exec("go", gb_args)
 }
@@ -84,6 +84,7 @@ func build(output) {
   }
 
   copy_libs(tmpdir)
+  setenv("RSX_BUILD", "1")
   go_build(tmpdir, output)
 }
 
@@ -101,8 +102,9 @@ cli.app({
               name := ctx.args()[0]
               os.mkdir(name)
               os.write_file(filepath.join(name, "main.risor"), "import rsx\n"+`rsx.log("Hello, World!")`)
-              os.mkdir(filepath.join(name, "lib"))
-              os.write_file(filepath.join(name, "/lib/rsx.risor"), _rsxLib)
+              libdir := filepath.join(name, "lib")
+              os.mkdir(libdir)
+              os.write_file(filepath.join(libdir,"README.md"), "Drop your .risor files here.")
               print('Created new RSX project in {name}. cd {name} to get started.')
               print("- 'rsx build' to build the project.")
               print("- 'risor --modules lib main.risor' to run the project.")
@@ -115,7 +117,7 @@ cli.app({
             action: func(ctx) {
               os.write_file("main.risor", "import rsx\n"+`rsx.log("Hello, World!")`)
               os.mkdir_all("lib")
-              os.write_file("lib/rsx.risor", _rsxLib)
+              os.write_file("lib/README.md", "Drop your .risor files here.")
               print("- 'rsx build' to build the project.")
               print("- 'risor --modules lib main.risor' to run the project.")
             },
@@ -126,7 +128,6 @@ cli.app({
             description: "Update the RSX library",
             action: func(ctx) {
               os.mkdir_all("lib")
-              os.write_file(filepath.join("lib/rsx.risor"), _rsxLib)
             },
         }),
         cli.command({

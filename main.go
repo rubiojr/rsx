@@ -62,9 +62,12 @@ func main() {
 		risor.WithGlobal("_goMod", _goMod),
 		risor.WithGlobal("_goSum", _goSum),
 		risor.WithGlobal("_importerGo", _importerGo),
-		risor.WithGlobal("_rsxLib", _rsxLib),
 		risor.WithGlobal("_generatorGo", _generatorGo),
+		risor.WithGlobal("rsx", _rsxLib),
+		risor.WithGlobal("_rsxLib", _rsxLib),
 		risor.WithGlobal("_rsModules", _rsModules)}
+
+	opts = append(opts, risor.WithImporter(newEmbedImporter()))
 
 	if len(os.Args) > 1 && os.Args[1] == "run" {
 		m, err := os.ReadFile("main.risor")
@@ -72,7 +75,6 @@ func main() {
 			logger.Fatal("error reading main.risor")
 		}
 		_mainRsr = string(m)
-		opts = append(opts, risor.WithLocalImporter("lib"))
 		if len(os.Args) > 2 {
 			ros.SetScriptArgs(append([]string{"main.risor"}, os.Args[2:]...))
 		}
@@ -90,7 +92,6 @@ func main() {
 			ros.SetScriptArgs(append([]string{script}, os.Args[3:]...))
 		}
 	} else {
-		opts = append(opts, risor.WithImporter(newEmbedImporter()))
 		ros.SetScriptArgs(os.Args)
 	}
 
