@@ -1,21 +1,23 @@
 module github.com/rubiojr/rsx
 
-go 1.22
+go 1.22.0
 
-replace github.com/risor-io/risor => github.com/rubiojr/risor v0.0.0-20241013222334-86e4c92c2d97
+toolchain go1.23.1
+
+//replace github.com/risor-io/risor => github.com/rubiojr/risor v0.0.0-20241013222334-86e4c92c2d97
 
 require (
 	github.com/charmbracelet/log v0.4.0
 	github.com/dave/jennifer v1.7.1
-	github.com/mattn/go-sqlite3 v1.14.23
-	github.com/risor-io/risor v1.6.1-0.20241002191325-24db18d54338
-	github.com/risor-io/risor/modules/bcrypt v1.6.1-0.20240927181516-d3d503b85ba6
-	github.com/risor-io/risor/modules/carbon v1.6.1-0.20240927181516-d3d503b85ba6
-	github.com/risor-io/risor/modules/cli v1.6.1-0.20240927181516-d3d503b85ba6
-	github.com/risor-io/risor/modules/sql v1.6.1-0.20240927181516-d3d503b85ba6
-	github.com/risor-io/risor/modules/uuid v1.6.1-0.20240927181516-d3d503b85ba6
+	github.com/mattn/go-sqlite3 v1.14.24
+	github.com/risor-io/risor v1.7.0
+	github.com/risor-io/risor/modules/bcrypt v1.7.0
+	github.com/risor-io/risor/modules/carbon v1.7.0
+	github.com/risor-io/risor/modules/cli v1.7.0
+	github.com/risor-io/risor/modules/semver v1.7.0
+	github.com/risor-io/risor/modules/sql v1.7.0
+	github.com/risor-io/risor/modules/uuid v1.7.0
 	github.com/rubiojr/risor-modules/sched v0.0.0-20241013152031-4ae97bed9022
-	github.com/rubiojr/risor-modules/semver v0.0.0-20241013153846-92286b927743
 )
 
 require (
