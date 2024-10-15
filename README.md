@@ -2,8 +2,8 @@
 
 `rsx` is a tool that packages your [Risor](https://risor.io) scripts into a standalone Go binary, allowing for easy distribution of your applications without dependencies.
 
-> [!WARNING]
-> RSX is currently in alpha.
+> [!NOTE]
+> RSX is currently in beta.
 
 ## Features
 
