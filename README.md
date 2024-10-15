@@ -1,3 +1,5 @@
+![logo](logo.png)
+
 # RSX: Package Risor Scripts into Go Binaries
 
 `rsx` is a tool that packages your [Risor](https://risor.io) scripts into a standalone Go binary, allowing for easy distribution of your applications without dependencies.
