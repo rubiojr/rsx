@@ -18,50 +18,32 @@
 
 __workers := []
 __chan := chan()
-__sent := 0
-__done := chan()
 __finished := 0
 
 func __worker(c) {
   return func() {
     for _, work := range c {
       work()
-      __done <- nil
     }
   }
 }
 
 // Create a new worker pool with n workers
 func new(n) {
-  spawn(func(){
-    for range __done {
-      __finished++
-      if __finished == __sent {
-        close(__chan)
-      }
-    }
-  })
-
   for i := 0; i < n; i++ {
     w := __worker(__chan)
-    __workers.append(spawn(func() { w() }))
+    __workers.append(spawn(w))
   }
 }
 
 // Queue a function to be executed by a worker goroutine
 func queue(fn) {
-  __sent++
-  __chan <- func() {
-    fn()
-  }
+  __chan <- fn
 }
 
 // Wait for all jobs to finish
 func wait() {
-  if __sent == 0 {
-    return
-  }
+  close(__chan)
 
-  <-__chan
   __workers.each(func(w) { w.wait() })
 }
