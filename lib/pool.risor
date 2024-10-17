@@ -1,0 +1,67 @@
+/*
+ * A simple worker pool implementation in Risor.
+ *
+ * Usage:
+ *
+ * // Create a pool with 2 workers
+ * pool.new(2)
+ *
+ * // Queue up some jobs
+ * for range 10 {
+ *   pool.queue(func() { time.sleep(1); print("hello") })
+ * }
+ *
+ * // Wait for all jobs to finish
+ * pool.wait()
+ *
+*/
+
+__workers := []
+__chan := chan()
+__sent := 0
+__done := chan()
+__finished := 0
+
+func __worker(c) {
+  return func() {
+    for _, work := range c {
+      work()
+      __done <- nil
+    }
+  }
+}
+
+// Create a new worker pool with n workers
+func new(n) {
+  spawn(func(){
+    for range __done {
+      __finished++
+      if __finished == __sent {
+        close(__chan)
+      }
+    }
+  })
+
+  for i := 0; i < n; i++ {
+    w := __worker(__chan)
+    __workers.append(spawn(func() { w() }))
+  }
+}
+
+// Queue a function to be executed by a worker goroutine
+func queue(fn) {
+  __sent++
+  __chan <- func() {
+    fn()
+  }
+}
+
+// Wait for all jobs to finish
+func wait() {
+  if __sent == 0 {
+    return
+  }
+
+  <-__chan
+  __workers.each(func(w) { w.wait() })
+}

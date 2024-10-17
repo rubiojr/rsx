@@ -67,6 +67,7 @@ func build(output) {
     "/importer.go": _importerGo,
     "/main.risor": os.read_file("main.risor"),
     "/lib/rsx.risor": _rsxLib,
+    "/lib/pool.risor": _rsxPool,
     "/generator.go": _generatorGo,
     "/.modules": _rsModules,
   }

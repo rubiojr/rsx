@@ -18,6 +18,9 @@ var _rsrLib embed.FS
 //go:embed lib/rsx.risor
 var _rsxLib string
 
+//go:embed lib/pool.risor
+var _rsxPool string
+
 //go:embed main.risor
 var _mainRsr string
 
@@ -66,6 +69,8 @@ func main() {
 		risor.WithGlobal("_generatorGo", _generatorGo),
 		risor.WithGlobal("rsx", _rsxLib),
 		risor.WithGlobal("_rsxLib", _rsxLib),
+		risor.WithGlobal("pool", _rsxPool),
+		risor.WithGlobal("_rsxPool", _rsxPool),
 		risor.WithGlobal("_rsModules", _rsModules)}
 
 	opts = append(opts, risor.WithImporter(newEmbedImporter()))
