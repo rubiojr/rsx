@@ -10,7 +10,9 @@
 ## Features
 
 - Package Risor scripts into a single executable
-- Built-in `rsx` module for extended functionality
+- Built-in Risor modules for additional functionality
+  - [Worker pool](https://github.com/rubiojr/risor-libs/blob/main/docs/pool.md)
+  - [RSX](https://github.com/rubiojr/risor-libs/blob/main/docs/rsx.md)
 - Easy project initialization and management
 - Built-in SQLite support with FTS5
 - Ability to external Risor native modules:
@@ -22,7 +24,6 @@ rsx.load("gh:rubiojr/risor-libs/lib/test", { branch: "main" })
 ```
 - Additional Risor Go modules included:
   - [sched](https://github.com/rubiojr/risor-modules/tree/main/sched/sched.md): Schedule tasks
-  - [semver](https://github.com/rubiojr/risor-modules/tree/main/semver/semver.md): Semantic version parser
 
 ## Pre-requisites
 
