@@ -18,7 +18,6 @@
 
 __workers := []
 __chan := chan()
-__finished := 0
 
 func __worker(c) {
   return func() {
