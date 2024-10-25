@@ -1,0 +1,6 @@
+[book]
+authors = ["Sergio Rubio"]
+language = "en"
+multilingual = false
+src = "src"
+title = "RSX - Risor Script Packager"
