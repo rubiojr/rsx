@@ -4,3 +4,7 @@ language = "en"
 multilingual = false
 src = "src"
 title = "RSX - Risor Script Packager"
+
+[output.html]
+preferred-dark-theme = "ayu"
+default-theme = "dark"
