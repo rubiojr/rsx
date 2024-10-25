@@ -17,7 +17,7 @@ require (
 	github.com/risor-io/risor/modules/semver v1.7.0
 	github.com/risor-io/risor/modules/sql v1.7.0
 	github.com/risor-io/risor/modules/uuid v1.7.0
-	github.com/rubiojr/risor-modules/sched v0.0.0-20241015183729-42a6a494a3ea
+	github.com/rubiojr/risor-modules/sched v0.0.0-20241025122444-181b55273469
 )
 
 require (
