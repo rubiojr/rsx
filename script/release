@@ -17,7 +17,11 @@ if !regexp.match(r, version) {
 }
 
 rsx.replace_in("version.go", r, version)
-rsx.shell('git commit -m "bump version to {version}" main.risor')
+rsx.shell("git diff --color").stdout | print()
+print("Commit and push?")
+print("Ctrl-C to abort, 5 seconds...")
+time.sleep(5)
+rsx.shell('git commit -m "bump version to {version}" -a')
 rsx.shell('git tag {version}')
 rsx.shell('git push')
 rsx.shell('git push --tags')
