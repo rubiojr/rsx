@@ -33,6 +33,12 @@ var _generatorGo string
 //go:embed importer.go
 var _importerGo string
 
+//go:embed repl.go
+var _replGo string
+
+//go:embed version.go
+var _versionGo string
+
 //go:embed go.mod
 var _goMod string
 
@@ -61,17 +67,21 @@ func main() {
 		risor.WithListenersAllowed(),
 		risor.WithLocalImporter("lib"),
 		risor.WithGlobals(globalModules()),
-		risor.WithGlobal("_mainGo", _mainGo),
 		risor.WithGlobal("_generatorGo", _generatorGo),
 		risor.WithGlobal("_goMod", _goMod),
 		risor.WithGlobal("_goSum", _goSum),
-		risor.WithGlobal("_importerGo", _importerGo),
 		risor.WithGlobal("_generatorGo", _generatorGo),
-		risor.WithGlobal("rsx", _rsxLib),
+		risor.WithGlobal("_importerGo", _importerGo),
+		risor.WithGlobal("_mainGo", _mainGo),
+		risor.WithGlobal("_replGo", _replGo),
+		risor.WithGlobal("_rsModules", _rsModules),
 		risor.WithGlobal("_rsxLib", _rsxLib),
-		risor.WithGlobal("pool", _rsxPool),
+		risor.WithGlobal("_rsxVersion", Version),
 		risor.WithGlobal("_rsxPool", _rsxPool),
-		risor.WithGlobal("_rsModules", _rsModules)}
+		risor.WithGlobal("_versionGo", _versionGo),
+		risor.WithGlobal("pool", _rsxPool),
+		risor.WithGlobal("rsx", _rsxLib),
+	}
 
 	opts = append(opts, risor.WithImporter(newEmbedImporter()))
 
@@ -97,6 +107,8 @@ func main() {
 		if len(os.Args) > 2 {
 			ros.SetScriptArgs(append([]string{script}, os.Args[3:]...))
 		}
+	} else if len(os.Args) > 1 && os.Args[1] == "repl" {
+		Repl(ctx, opts)
 	} else {
 		ros.SetScriptArgs(os.Args)
 	}
