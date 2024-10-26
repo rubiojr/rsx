@@ -7,8 +7,10 @@ toolchain go1.23.1
 //replace github.com/risor-io/risor => github.com/rubiojr/risor v0.0.0-20241013222334-86e4c92c2d97
 
 require (
+	atomicgo.dev/keyboard v0.2.9
 	github.com/charmbracelet/log v0.4.0
 	github.com/dave/jennifer v1.7.1
+	github.com/fatih/color v1.17.0
 	github.com/mattn/go-sqlite3 v1.14.24
 	github.com/risor-io/risor v1.7.0
 	github.com/risor-io/risor/modules/bcrypt v1.7.0
@@ -26,8 +28,8 @@ require (
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/blang/semver/v4 v4.0.0 // indirect
 	github.com/charmbracelet/lipgloss v0.10.0 // indirect
+	github.com/containerd/console v1.0.3 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.4 // indirect
-	github.com/fatih/color v1.17.0 // indirect
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/go-sql-driver/mysql v1.8.1 // indirect
 	github.com/gofrs/uuid/v5 v5.3.0 // indirect

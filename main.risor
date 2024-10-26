@@ -4,7 +4,6 @@ import exec
 import os
 import filepath
 
-const version = "v0.5.5"
 debug := false
 
 func cleanup(dir) {
@@ -69,6 +68,8 @@ func build(output) {
     "/lib/rsx.risor": _rsxLib,
     "/lib/pool.risor": _rsxPool,
     "/generator.go": _generatorGo,
+    "/repl.go": _replGo,
+    "/version.go": _versionGo,
     "/.modules": _rsModules,
   }
 
@@ -93,7 +94,7 @@ cli.app({
     name: "rsx",
     usage_string: "Build risor enabled binaries",
     usage: "build Risor enabled binaries",
-    version: version,
+    version: _rsxVersion,
     commands: [
         cli.command({
             args: true,
@@ -147,13 +148,20 @@ cli.app({
         }),
         cli.command({
             args: true,
+            // This command is handled from the Go side.
+            // It's here to provide a better help message.
+            name: "repl",
+            description: "Risor REPL",
+        }),
+        cli.command({
+            args: true,
             name: "build",
             description: "Build the current directory",
             action: func(ctx) {
               if ctx.bool("debug") {
                 debug = true
                 os.setenv("RSX_DEBUG", "1")
-                rsx.debug('RSX version {version}')
+                rsx.debug('RSX version {_rsxVersion}')
               }
               output := ctx.string("output")
               build(output)

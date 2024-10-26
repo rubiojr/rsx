@@ -16,7 +16,7 @@ if !regexp.match(r, version) {
   os.exit(1)
 }
 
-rsx.replace_in("main.risor", r, version)
+rsx.replace_in("version.go", r, version)
 rsx.shell('git commit -m "bump version to {version}" main.risor')
 rsx.shell('git tag {version}')
 rsx.shell('git push')
