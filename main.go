@@ -61,7 +61,6 @@ func main() {
 	}
 
 	ctx := context.Background()
-	//cfg := risor.NewConfig()
 	opts := []risor.Option{
 		risor.WithConcurrency(),
 		risor.WithListenersAllowed(),
