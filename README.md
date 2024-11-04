@@ -72,7 +72,6 @@ Ensure that your Go bin directory is in your PATH.
 
 - `main.risor`: The entry point of your application.
 - `lib/`: Directory for additional Risor modules.
-- `lib/rsx.risor`: Built-in RSX module with utility functions.
 
 ## Adding custom Risor modules
 
@@ -121,6 +120,11 @@ This allows for faster iteration without needing to rebuild the binary.
 > [!NOTE]
 > Custom native Go modules not built into RSX are not avaible with `rsx run`.
 > If you are using a custom module, you will need to build the binary with `rsx build` to test it.
+
+## Projects using RSX
+
+- [Verba](https://github.com/rubiojr/verba-go): API server to store and index Spanish RTVE news transcripts.
+- [Firefox history exporter](https://github.com/rubiojr/history-exporter) - Firefox history to JSON exports.
 
 ## Contributing
 
