@@ -34,7 +34,7 @@ You need to have Go installed on your system. If you don't have it, you can down
 Install RSX using Go:
 
 ```bash
-go install --tags fts5 github.com/rubiojr/rsx@latest
+go install --tags fts5,semver github.com/rubiojr/rsx@latest
 ```
 
 Ensure that your Go bin directory is in your PATH.

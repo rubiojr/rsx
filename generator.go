@@ -31,14 +31,21 @@ func main() {
 	globals := map[string]string{}
 	for _, ds := range list {
 		mAlias := modPrefix + filepath.Base(ds)
-		source.ImportAlias(ds, mAlias)
 		globals[ds] = mAlias
-		//source.Anon(ds)
 	}
 
 	var stmts []jen.Code
 	for k, _ := range globals {
-		stmts = append(stmts, jen.Lit(filepath.Base(k)).Op(":").Qual(k, "Module").Call())
+		key := filepath.Base(k)
+		mPath := k
+		if strings.Contains(k, "@") {
+			tokens := strings.Split(k, "@")
+			key = tokens[0]
+			mPath = tokens[1]
+		}
+		alias := modPrefix + key
+		source.ImportAlias(mPath, alias)
+		stmts = append(stmts, jen.Lit(key).Op(":").Qual(mPath, "Module").Call())
 	}
 
 	source.Func().Id("globalModules").Params().Map(jen.String()).Any().Block(
