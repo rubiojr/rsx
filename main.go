@@ -4,6 +4,7 @@ import (
 	"context"
 	"embed"
 	"os"
+	"reflect"
 	"time"
 
 	"github.com/charmbracelet/log"
@@ -65,7 +66,6 @@ func main() {
 		risor.WithConcurrency(),
 		risor.WithListenersAllowed(),
 		risor.WithLocalImporter("lib"),
-		risor.WithGlobals(globalModules()),
 		risor.WithGlobal("_generatorGo", _generatorGo),
 		risor.WithGlobal("_goMod", _goMod),
 		risor.WithGlobal("_goSum", _goSum),
@@ -80,6 +80,14 @@ func main() {
 		risor.WithGlobal("_versionGo", _versionGo),
 		risor.WithGlobal("pool", _rsxPool),
 		risor.WithGlobal("rsx", _rsxLib),
+	}
+
+	for k, v := range globalModules() {
+		if reflect.ValueOf(v).IsNil() {
+			logger.Warnf("Missing module %s, missing build tag?", k)
+			continue
+		}
+		opts = append(opts, risor.WithGlobal(k, v))
 	}
 
 	opts = append(opts, risor.WithImporter(newEmbedImporter()))

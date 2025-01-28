@@ -134,3 +134,19 @@ test.with_temp_dir(func(tmp_dir) {
     '',
   )
 })
+
+test.with_temp_dir(func(tmp_dir) {
+  cd(tmp_dir)
+  os.mkdir_all("lib")
+  f := os.create("lib/test.risor")
+  f.write("func main() { print('Hello, World!') }")
+
+  f = os.create("main.risor")
+  f.write("import test; import k8s; test.main()")
+
+  f = os.create(".modules")
+  f.write("k8s@github.com/risor-io/risor/modules/kubernetes")
+
+  exec(_rsxbin, ["build", "-tags", "k8s", "-o", "test"])
+  test.equals("importing custom k8s module works", "Hello, World!\n", exec("./test").stdout)
+})
