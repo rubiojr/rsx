@@ -88,7 +88,7 @@ github.com/rubiojr/risor-modules/hello
 github.com/rubiojr/risor-modules/onemore
 ```
 
-Where each line is the Go module path used in a Go import statement.
+Where each line is the Go module path used in a Go import statement. Aliases are supported, simply prefix the module path with `<alias>@`, like `hola@github.com/rubiojr/risor-modules/hello`.
 
 Then, run `rsx build` to build the binary with the custom module.
 
