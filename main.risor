@@ -105,7 +105,8 @@ cli.app({
         cli.command({
             args: true,
             name: "new",
-            description: "Create a new RSX project directory",
+            aliases: ["n"],
+            usage: "Create a new RSX project directory",
             action: func(ctx) {
               name := ctx.args()[0]
               os.mkdir(name)
@@ -121,7 +122,8 @@ cli.app({
         cli.command({
             args: false,
             name: "seed",
-            description: "Seed the current directory",
+            aliases: ["s"],
+            usage: "Seed the current directory",
             action: func(ctx) {
               os.write_file("main.risor", "import rsx\n"+`rsx.log("Hello, World!")`)
               os.mkdir_all("lib")
@@ -133,7 +135,7 @@ cli.app({
         cli.command({
             args: true,
             name: "refresh",
-            description: "Update the RSX library",
+            usage: "Update the RSX library",
             action: func(ctx) {
               os.mkdir_all("lib")
             },
@@ -143,26 +145,29 @@ cli.app({
             // This command is handled from the Go side.
             // It's here to provide a better help message.
             name: "run",
-            description: "Run main.risor from the current directory",
+            aliases: ["r"],
+            usage: "Run main.risor from the current directory",
         }),
         cli.command({
             args: true,
             // This command is handled from the Go side.
             // It's here to provide a better help message.
             name: "eval",
-            description: "Eval given Risor script",
+            aliases: ["e"],
+            usage: "Evaluates a given Risor script",
         }),
         cli.command({
             args: true,
             // This command is handled from the Go side.
             // It's here to provide a better help message.
             name: "repl",
-            description: "Risor REPL",
+            usage: "Run the Risor REPL",
         }),
         cli.command({
             args: true,
             name: "build",
-            description: "Build the current directory",
+            usage: "Build the current directory",
+            aliases: ["b"],
             action: func(ctx) {
               if ctx.bool("debug") {
                 debug = true
