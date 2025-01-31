@@ -10,6 +10,7 @@ import (
 	"github.com/charmbracelet/log"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/risor-io/risor"
+	"github.com/risor-io/risor/errz"
 	ros "github.com/risor-io/risor/os"
 )
 
@@ -126,6 +127,10 @@ func main() {
 		opts...,
 	)
 	if err != nil {
-		logger.Fatal(err)
+		errMsg := err.Error()
+		if friendlyErr, ok := err.(errz.FriendlyError); ok {
+			errMsg = friendlyErr.FriendlyErrorMessage()
+		}
+		logger.Fatal(errMsg)
 	}
 }
