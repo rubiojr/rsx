@@ -164,6 +164,13 @@ cli.app({
             usage: "Run the Risor REPL",
         }),
         cli.command({
+            name: "version",
+            usage: "Print version",
+            action: func(ctx) {
+              print('{_rsxVersion}')
+            },
+        }),
+        cli.command({
             args: true,
             name: "build",
             usage: "Build the current directory",
