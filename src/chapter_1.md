@@ -8,7 +8,7 @@ go install github.com/rubiojr/rsx@latest
 
 If you want RSX with SQLite and FTS5 (full-text search) support:
 ```bash
-CGO_ENABLED=1 go install --tags fts5 github.com/rubiojr/rsx@latest
+CGO_ENABLED=1 go install --tags fts5,semver github.com/rubiojr/rsx@latest
 ```
 
 ### 2. Create Your First Project
