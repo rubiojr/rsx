@@ -23,7 +23,7 @@ builds:
       - windows
       - darwin
     tags:
-      - fts5
+      - fts5,semver
 
 archives:
   - format: tar.gz
