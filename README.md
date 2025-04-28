@@ -22,9 +22,6 @@ import rsx
 
 rsx.load("gh:rubiojr/risor-libs/lib/test", { branch: "main" })
 ```
-- Additional Risor Go modules included:
-  - [sched](https://github.com/rubiojr/risor-modules/tree/main/sched/sched.md): Schedule tasks
-
 ## Pre-requisites
 
 You need to have Go installed on your system. If you don't have it, you can download it from the [official website](https://golang.org/dl/).
