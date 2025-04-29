@@ -43,7 +43,7 @@ func main() {
 			key = tokens[0]
 			mPath = tokens[1]
 		}
-		alias := modPrefix + key
+		alias := modPrefix + strings.Replace(key, "-", "", -1)
 		source.ImportAlias(mPath, alias)
 		stmts = append(stmts, jen.Lit(key).Op(":").Qual(mPath, "Module").Call())
 	}
