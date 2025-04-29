@@ -12,7 +12,7 @@ require (
 	github.com/dave/jennifer v1.7.1
 	github.com/fatih/color v1.18.0
 	github.com/mattn/go-sqlite3 v1.14.24
-	github.com/risor-io/risor v1.6.1-0.20250427195538-8d3d01563625
+	github.com/risor-io/risor v1.6.1-0.20250429120510-3320163b15f3
 	github.com/risor-io/risor/modules/bcrypt v1.7.0
 	github.com/risor-io/risor/modules/carbon v1.7.0
 	github.com/risor-io/risor/modules/cli v1.7.0
