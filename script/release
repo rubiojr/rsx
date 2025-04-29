@@ -16,7 +16,6 @@ if !regexp.match(r, version) {
   os.exit(1)
 }
 
-rsx.replace_in("version.go", r, version)
 rsx.shell("git diff --color").stdout | print()
 print("Commit and push?")
 print("Ctrl-C to abort, 5 seconds...")
