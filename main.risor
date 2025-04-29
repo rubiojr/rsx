@@ -28,7 +28,13 @@ func go_build(dir, output, tags) {
   //exec("go", ["mod", "init", "rsxmod"])
 
   rsx.debug('Running go generate')
+  goos := os.getenv("GOOS")
+  goarch := os.getenv("GOARCH")
+  setenv("GOOS", "")
+  setenv("GOARCH", "")
   exec("go", ["run", "generator.go"])
+  setenv("GOOS", goos)
+  setenv("GOARCH", goarch)
 
   rsx.debug('Running go mod tidy')
   exec("go", ["mod", "tidy"])
@@ -39,7 +45,7 @@ func go_build(dir, output, tags) {
   }
   rsx.debug('Build tags: {",".join(btags)}')
 
-  gb_args := ["build", "-tags", ",".join(btags), "-ldflags", "-s -w", "-o", bin_path]
+  gb_args := ["build", "-tags", ",".join(btags), "-o", bin_path]
   rsx.debug('Running go {strings.join(gb_args, " ")}...')
   exec("go", gb_args)
 }
