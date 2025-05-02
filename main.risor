@@ -15,6 +15,32 @@ func cleanup(dir) {
   os.remove_all(dir)
 }
 
+func get_module_versions() {
+  // each .module_versions line
+  failed := false
+  rsx.lines(string(os.read_file(".module_versions"))).each(func(line){
+    if strings.trim_space(line) == "" {
+      return
+    }
+    rsx.debug('Running go get {line}')
+    return try(func() {
+      exec("go", ["get", line])
+    },
+    func() {
+      rsx.debug('Failed to get module {line}')
+      // FIXME:
+      // Ideally we raise a new error with error("msg")
+      // But Risor in it's current version doesn't seem to propagate the error
+      // from within the iterator block
+      failed = true
+    })
+  })
+
+  if failed {
+    error('Failed fetching dependencies')
+  }
+}
+
 func go_build(dir, output, tags) {
   bin_path := output
   if !filepath.is_abs(bin_path) {
@@ -36,6 +62,9 @@ func go_build(dir, output, tags) {
   setenv("GOOS", goos)
   setenv("GOARCH", goarch)
 
+  if rsx.is_file(".module_versions") {
+    get_module_versions()
+  }
   rsx.debug('Running go mod tidy')
   exec("go", ["mod", "tidy"])
 
@@ -89,6 +118,12 @@ func build(output, tags) {
     rsx.debug('Found custom .modules file, appending')
     content := string(os.read_file(".modules"))
     copy["/.modules"] = copy["/.modules"]+content
+  }
+
+  if rsx.is_file(".module_versions") {
+    rsx.debug('Found custom .module_versions file, appending')
+    content := string(os.read_file(".module_versions"))
+    copy["/.module_versions"] = content
   }
 
   os.mkdir_all(filepath.join(tmpdir, "/lib"))
