@@ -17,6 +17,7 @@ strconv
 strings
 tablewriter
 time
+template
 uuid
 yaml
 semver

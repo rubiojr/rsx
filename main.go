@@ -11,6 +11,8 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/risor-io/risor"
 	"github.com/risor-io/risor/errz"
+	modfmt "github.com/risor-io/risor/modules/fmt"
+	"github.com/risor-io/risor/modules/template"
 	ros "github.com/risor-io/risor/os"
 )
 
@@ -81,6 +83,13 @@ func main() {
 		risor.WithGlobal("_versionGo", _versionGo),
 		risor.WithGlobal("pool", _rsxPool),
 		risor.WithGlobal("rsx", _rsxLib),
+	}
+
+	for k, v := range template.Builtins() {
+		opts = append(opts, risor.WithGlobal(k, v))
+	}
+	for k, v := range modfmt.Builtins() {
+		opts = append(opts, risor.WithGlobal(k, v))
 	}
 
 	for k, v := range globalModules() {

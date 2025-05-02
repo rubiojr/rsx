@@ -22,12 +22,13 @@ import (
 	rsmstrconv "github.com/risor-io/risor/modules/strconv"
 	rsmstrings "github.com/risor-io/risor/modules/strings"
 	rsmtablewriter "github.com/risor-io/risor/modules/tablewriter"
+	rsmtemplate "github.com/risor-io/risor/modules/template"
 	rsmtime "github.com/risor-io/risor/modules/time"
 	rsmuuid "github.com/risor-io/risor/modules/uuid"
 	rsmyaml "github.com/risor-io/risor/modules/yaml"
 )
 
 func globalModules() map[string]any {
-	a := map[string]any{"bcrypt": rsmbcrypt.Module(), "net": rsmnet.Module(), "strconv": rsmstrconv.Module(), "bytes": rsmbytes.Module(), "cli": rsmcli.Module(), "color": rsmcolor.Module(), "os": rsmos.Module(), "rand": rsmrand.Module(), "time": rsmtime.Module(), "uuid": rsmuuid.Module(), "semver": rsmsemver.Module(), "base64": rsmbase64.Module(), "fmt": rsmfmt.Module(), "http": rsmhttp.Module(), "json": rsmjson.Module(), "sql": rsmsql.Module(), "strings": rsmstrings.Module(), "tablewriter": rsmtablewriter.Module(), "yaml": rsmyaml.Module(), "carbon": rsmcarbon.Module(), "exec": rsmexec.Module(), "regexp": rsmregexp.Module()}
+	a := map[string]any{"exec": rsmexec.Module(), "fmt": rsmfmt.Module(), "json": rsmjson.Module(), "net": rsmnet.Module(), "os": rsmos.Module(), "rand": rsmrand.Module(), "bytes": rsmbytes.Module(), "cli": rsmcli.Module(), "template": rsmtemplate.Module(), "regexp": rsmregexp.Module(), "uuid": rsmuuid.Module(), "yaml": rsmyaml.Module(), "semver": rsmsemver.Module(), "base64": rsmbase64.Module(), "bcrypt": rsmbcrypt.Module(), "http": rsmhttp.Module(), "sql": rsmsql.Module(), "strconv": rsmstrconv.Module(), "strings": rsmstrings.Module(), "tablewriter": rsmtablewriter.Module(), "time": rsmtime.Module(), "carbon": rsmcarbon.Module(), "color": rsmcolor.Module()}
 	return a
 }
