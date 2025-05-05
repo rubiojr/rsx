@@ -37,7 +37,7 @@ func get_module_versions() {
   })
 
   if failed {
-    error('Failed fetching dependencies')
+    error('Failed fetching external modules')
   }
 }
 
