@@ -12,14 +12,17 @@ require (
 	github.com/dave/jennifer v1.7.1
 	github.com/fatih/color v1.18.0
 	github.com/mattn/go-sqlite3 v1.14.24
-	github.com/risor-io/risor v1.6.1-0.20250501165217-ec16fd3f4fbb
+	github.com/risor-io/risor v1.8.0
 	github.com/risor-io/risor/modules/bcrypt v1.7.0
 	github.com/risor-io/risor/modules/carbon v1.7.0
 	github.com/risor-io/risor/modules/cli v1.7.0
-	github.com/risor-io/risor/modules/semver v1.7.0
+	github.com/risor-io/risor/modules/color v1.8.0
+	github.com/risor-io/risor/modules/semver v1.8.0
 	github.com/risor-io/risor/modules/sql v1.7.0
+	github.com/risor-io/risor/modules/tablewriter v1.8.0
 	github.com/risor-io/risor/modules/template v1.7.0
 	github.com/risor-io/risor/modules/uuid v1.7.0
+	github.com/risor-io/risor/modules/yaml v1.8.0
 )
 
 require (
@@ -86,7 +89,7 @@ require (
 	golang.org/x/exp v0.0.0-20240823005443-9b4947da3948 // indirect
 	golang.org/x/net v0.28.0 // indirect
 	golang.org/x/oauth2 v0.22.0 // indirect
-	golang.org/x/sys v0.32.0 // indirect
+	golang.org/x/sys v0.33.0 // indirect
 	golang.org/x/term v0.30.0 // indirect
 	golang.org/x/text v0.23.0 // indirect
 	golang.org/x/time v0.6.0 // indirect
