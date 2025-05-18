@@ -3,7 +3,8 @@ import regexp
 import exec
 
 func shell(command) {
-  exec("bash", ["-c", command])
+  cmd := exec.command(["bash", "-c", command])
+  return string(cmd.combined_output())
 }
 
 func log(msg) {
