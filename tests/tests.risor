@@ -19,7 +19,7 @@ test.with_temp_dir(func(tmp_dir) {
 
 test.with_temp_dir(func(tmp_dir) {
   dir := filepath.join(tmp_dir, "rsx-new")
-  test.stdout_matches(
+  test.stderr_matches(
     'rsx new without arguments fails',
     '{_rsxbin} new',
     'Missing directory argument.',

@@ -149,6 +149,31 @@ func stdout_equals(desc, cmd, expected) {
 
 }
 
+// Assert that cmd stderr output matches a regular expression.
+//
+// desc: the test description
+// cmd: the command to run
+// reg: the regular expression to match
+func stderr_matches(desc, cmd, reg) {
+  tokens := cmd.split(" ")
+  bin := tokens[0]
+  args := [bin]
+  if len(tokens) > 1 {
+    args.extend(tokens[1:])
+  }
+
+  try(func() {
+    res := exec(args)
+    if regexp.match(reg, res.stderr) {
+      print_ok(desc)
+    } else {
+      error('"{res.stderr}" does not match "{reg}"')
+    }
+  }, func(e) {
+    print_fail(desc + ' (error: {e})')
+  })
+}
+
 // Assert that cmd output matches a regular expression.
 //
 // desc: the test description
@@ -162,14 +187,12 @@ func stdout_matches(desc, cmd, reg) {
     args.extend(tokens[1:])
   }
 
-  cmd := exec.command(args)
   try(func() {
-    out := cmd.combined_output()
-    out = string(out)
-    if regexp.match(reg, out) {
+    res := exec(args)
+    if regexp.match(reg, res.stdout) {
       print_ok(desc)
     } else {
-      error(desc + ' (output {out} does not match {reg})')
+      error('"{res.stdout}" does not match "{reg}"')
     }
   }, func(e) {
     print_fail(desc + ' (error: {e})')
