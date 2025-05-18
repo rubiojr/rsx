@@ -161,7 +161,7 @@ cli.app({
               os.write_file(filepath.join(libdir,"README.md"), "Drop your .risor files here.")
               print('Created new RSX project in {name}. cd {name} to get started.')
               print("- 'rsx build' to build the project.")
-              print("- 'risor --modules lib main.risor' to run the project.")
+              print("- 'rsx run' to run the project.")
             },
         }),
         cli.command({

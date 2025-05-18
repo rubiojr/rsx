@@ -13,6 +13,7 @@
 - Built-in Risor modules for additional functionality
   - [Worker pool](https://github.com/rubiojr/risor-libs/blob/main/docs/pool.md)
   - [RSX](https://github.com/rubiojr/risor-libs/blob/main/docs/rsx.md)
+  - [Tests](https://github.com/rubiojr/risor-libs/blob/main/docs/test.md)
 - Easy project initialization and management
 - Built-in SQLite support with FTS5
 - Ability to external Risor native modules:
