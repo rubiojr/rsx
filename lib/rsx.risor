@@ -4,7 +4,16 @@ import exec
 
 func shell(command) {
   cmd := exec.command(["bash", "-c", command])
-  return string(cmd.combined_output())
+  buf := buffer()
+  cmd.stderr = buf
+  cmd.stdout = buf
+  cmd.env = os.environ()
+  err := false
+  try(func() {
+    cmd.run()
+  }, func() { err = true })
+
+  return string(buf)
 }
 
 func log(msg) {
