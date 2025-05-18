@@ -149,6 +149,10 @@ cli.app({
             aliases: ["n"],
             usage: "Create a new RSX project directory",
             action: func(ctx) {
+              if len(ctx.args()) != 1 {
+                os.write_file("/dev/stderr", "Missing directory argument.")
+                return
+              }
               name := ctx.args()[0]
               os.mkdir(name)
               os.write_file(filepath.join(name, "main.risor"), "import rsx\n"+`rsx.log("Hello, World!")`)

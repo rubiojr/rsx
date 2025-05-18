@@ -2,4 +2,4 @@
 
 go build
 
-risor --modules tests/lib tests/tests.risor
+./rsx eval tests/tests.risor
