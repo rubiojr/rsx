@@ -13,8 +13,13 @@ func shell(command) {
     cmd.run()
   }, func() { err = true })
 
+  if err {
+    error('error {string(buf)}')
+  }
+
   return string(buf)
 }
+func sh(command) { return shell(command) }
 
 func log(msg) {
   print(msg)
