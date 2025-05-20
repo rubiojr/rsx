@@ -2,6 +2,16 @@ import os
 import regexp
 import exec
 
+func log(msg) {
+  print(msg)
+}
+
+func debug(msg) {
+  if os.getenv("RSX_DEBUG") == "1" {
+    print('DEBUG: {msg}')
+  }
+}
+
 func shell(command) {
   cmd := exec.command(["bash", "-c", command])
   buf := buffer()
@@ -14,22 +24,13 @@ func shell(command) {
   }, func() { err = true })
 
   if err {
+    debug(string(buf))
     error('error {string(buf)}')
   }
 
   return string(buf)
 }
 func sh(command) { return shell(command) }
-
-func log(msg) {
-  print(msg)
-}
-
-func debug(msg) {
-  if os.getenv("RSX_DEBUG") == "1" {
-    print(msg)
-  }
-}
 
 func env(key, def) {
   v := os.getenv(key)
