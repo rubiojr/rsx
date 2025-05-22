@@ -41,6 +41,10 @@ func env(key, def) {
 }
 
 func is_file(target) {
+  if strings.contains(target, "\n") {
+    return false
+  }
+
   try(func() { f := os.stat(target); !f.is_dir }, false)
 }
 
@@ -49,6 +53,10 @@ func is_dir(target) {
 }
 
 func lines(content) {
+  if len(content.split("\n")) > 1 {
+    return content.split("\n")
+  }
+
   if is_file(content) {
     return string(os.read_file(content)).split("\n")
   }
@@ -66,7 +74,11 @@ func replace_in(target, rgxp, repl) {
       l.append(line)
     }
   })
-  os.write_file(target, strings.join(l, "\n"))
+  content := strings.join(l, "\n")
+  if is_file(target) {
+    os.write_file(target, content)
+  }
+  return content
 }
 
 

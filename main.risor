@@ -41,6 +41,36 @@ func get_module_versions() {
   }
 }
 
+func go_install(dir, tags) {
+  cd(dir)
+  rsx.debug('Working directory {dir}')
+
+  rsx.debug('Running go generate')
+  goos := os.getenv("GOOS")
+  goarch := os.getenv("GOARCH")
+  setenv("GOOS", "")
+  setenv("GOARCH", "")
+  exec("go", ["run", "generator.go"])
+  setenv("GOOS", goos)
+  setenv("GOARCH", goarch)
+
+  if rsx.is_file(".module_versions") {
+    get_module_versions()
+  }
+  rsx.debug('Running go mod tidy')
+  exec("go", ["mod", "tidy"])
+
+  btags := ["semver", "fts5"]
+  if tags != "" {
+    btags.extend(tags.split(","))
+  }
+  rsx.debug('Build tags: {",".join(btags)}')
+
+  gb_args := ["install", "-tags", ",".join(btags)]
+  rsx.debug('Running go {strings.join(gb_args, " ")}...')
+  exec("go", gb_args)
+}
+
 func go_build(dir, output, tags) {
   bin_path := output
   if !filepath.is_abs(bin_path) {
@@ -137,6 +167,50 @@ func build(output, tags) {
   go_build(tmpdir, output, tags)
 }
 
+func install(output, tags) {
+  tmpdir := os.mkdir_temp("/tmp", "rsx")
+  defer cleanup(tmpdir)
+
+  rsx.debug('Building in {tmpdir}...')
+
+  gomod := rsx.replace_in(_goMod, "module github.com/rubiojr/rsx", 'module github.com/rubiojr/{output}')
+  copy := {
+    "/go.mod": gomod,
+    "/go.sum": _goSum,
+    "/main.go": _mainGo,
+    "/importer.go": _importerGo,
+    "/main.risor": os.read_file("main.risor"),
+    "/lib/rsx.risor": _rsxLib,
+    "/lib/pool.risor": _rsxPool,
+    "/generator.go": _generatorGo,
+    "/repl.go": _replGo,
+    "/version.go": _versionGo,
+    "/.modules": _rsModules,
+  }
+
+  if rsx.is_file(".modules") {
+    rsx.debug('Found custom .modules file, appending')
+    content := string(os.read_file(".modules"))
+    copy["/.modules"] = copy["/.modules"]+content
+  }
+
+  if rsx.is_file(".module_versions") {
+    rsx.debug('Found custom .module_versions file, appending')
+    content := string(os.read_file(".module_versions"))
+    copy["/.module_versions"] = content
+  }
+
+  os.mkdir_all(filepath.join(tmpdir, "/lib"))
+
+  for k, v := range copy {
+    os.write_file(filepath.join(tmpdir, k), v)
+  }
+
+  copy_libs(tmpdir)
+  setenv("RSX_BUILD", "1")
+  go_install(tmpdir, tags)
+}
+
 cli.app({
     name: "rsx",
     usage_string: "Build risor enabled binaries",
@@ -214,6 +288,38 @@ cli.app({
             action: func(ctx) {
               print('{_rsxVersion}')
             },
+        }),
+        cli.command({
+          name: "install",
+          usage: "Build and install the binary",
+          flags: [
+              cli.flag({
+                  name: "output",
+                  aliases: ["o"],
+                  type: "string",
+                  value: filepath.split(os.getwd())[-1],
+              }),
+              cli.flag({
+                  name: "tags",
+                  aliases: ["t"],
+                  type: "string",
+                  value: "",
+              }),
+              cli.flag({
+                  name: "debug",
+                  type: "bool",
+              }),
+          ],
+          action: func(ctx) {
+            if ctx.bool("debug") {
+              debug = true
+              os.setenv("RSX_DEBUG", "1")
+              rsx.debug('RSX version {_rsxVersion}')
+            }
+            tags := ctx.string("tags")
+            output := ctx.string("output")
+            install(output, tags)
+          },
         }),
         cli.command({
             args: true,
