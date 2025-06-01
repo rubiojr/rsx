@@ -88,6 +88,8 @@ func copy_libs(dir) {
   filepath.walk_dir("lib", func(path, dir_entry, err) {
     if dir_entry.type == "regular" {
       dest := filepath.join(dir, path)
+      d := filepath.dir(dest)
+      os.mkdir_all(d)
       rsx.debug('Copying file {path} to {dest}')
       cp(path, dest)
     }

@@ -16,7 +16,7 @@ import (
 	ros "github.com/risor-io/risor/os"
 )
 
-//go:embed lib/*.risor
+//go:embed lib/*
 var _rsrLib embed.FS
 
 //go:embed lib/rsx.risor
