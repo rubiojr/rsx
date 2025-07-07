@@ -168,14 +168,6 @@ cli.app({
         }),
         cli.command({
             args: true,
-            name: "refresh",
-            usage: "Update the RSX library",
-            action: func(ctx) {
-              os.mkdir_all("lib")
-            },
-        }),
-        cli.command({
-            args: true,
             // This command is handled from the Go side.
             // It's here to provide a better help message.
             name: "exec",
