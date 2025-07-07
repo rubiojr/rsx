@@ -178,17 +178,17 @@ cli.app({
             args: true,
             // This command is handled from the Go side.
             // It's here to provide a better help message.
-            name: "run",
-            aliases: ["r"],
+            name: "exec",
+            aliases: ["x"],
             usage: "Run main.risor from the current directory",
         }),
         cli.command({
             args: true,
             // This command is handled from the Go side.
             // It's here to provide a better help message.
-            name: "eval",
-            aliases: ["e"],
-            usage: "Evaluates a given Risor script",
+            name: "run",
+            aliases: ["r"],
+            usage: "Runs a given Risor script",
         }),
         cli.command({
             args: true,

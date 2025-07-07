@@ -102,7 +102,7 @@ func main() {
 
 	opts = append(opts, risor.WithImporter(newEmbedImporter()))
 
-	if len(os.Args) > 1 && os.Args[1] == "run" {
+	if len(os.Args) > 1 && os.Args[1] == "exec" {
 		m, err := os.ReadFile("main.risor")
 		if err != nil {
 			logger.Fatal("error reading main.risor")
@@ -111,7 +111,7 @@ func main() {
 		if len(os.Args) > 2 {
 			ros.SetScriptArgs(append([]string{"main.risor"}, os.Args[2:]...))
 		}
-	} else if len(os.Args) > 1 && os.Args[1] == "eval" {
+	} else if len(os.Args) > 1 && os.Args[1] == "run" {
 		if len(os.Args) < 3 {
 			logger.Fatal("missing script argument")
 		}

@@ -2,4 +2,4 @@
 
 go build
 
-./rsx eval tests/tests.risor
+./rsx run tests/tests.risor

@@ -66,8 +66,8 @@ test.with_temp_dir(func(tmp_dir) {
   )
   cd("test")
   test.stdout_equals(
-    'rsx eval runs main.risor',
-    '{_rsxbin} eval main.risor',
+    'rsx run runs main.risor',
+    '{_rsxbin} run main.risor',
     "Hello, World!\n",
   )
 })
@@ -81,9 +81,9 @@ test.with_temp_dir(func(tmp_dir) {
   )
   cd("test")
   test.raises(
-    'rsx eval without argument errors',
+    'rsx run without argument errors',
     func() {
-      exec(_rsxbin, ["eval"])
+      exec(_rsxbin, ["run"])
     }, errors.new("exit status 1"))
 })
 
@@ -96,8 +96,8 @@ test.with_temp_dir(func(tmp_dir) {
   )
   cd("test")
   test.stdout_equals(
-    'rsx run runs main.risor',
-    '{_rsxbin} run',
+    'rsx exec runs main.risor',
+    '{_rsxbin} exec',
     "Hello, World!\n",
   )
 })
@@ -112,8 +112,8 @@ test.with_temp_dir(func(tmp_dir) {
   f.write("import test; test.main()")
 
   test.stdout_equals(
-    'rsx eval main.risor includes lib/',
-    '{_rsxbin} eval main.risor',
+    'rsx run main.risor includes lib/',
+    '{_rsxbin} run main.risor',
     "Hello, World!\n",
   )
 })
@@ -125,8 +125,8 @@ test.with_temp_dir(func(tmp_dir) {
   f.write("import rsx")
 
   test.stdout_equals(
-    'rsx eval main.risor imports built-in rsx',
-    '{_rsxbin} eval main.risor',
+    'rsx run main.risor imports built-in rsx',
+    '{_rsxbin} run main.risor',
     '',
   )
 })
