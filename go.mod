@@ -38,6 +38,7 @@ require (
 	github.com/emicklei/go-restful/v3 v3.12.2 // indirect
 	github.com/evanphx/json-patch/v5 v5.9.11 // indirect
 	github.com/fxamacker/cbor/v2 v2.8.0 // indirect
+	github.com/go-echarts/go-echarts/v2 v2.5.4 // indirect
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-openapi/jsonpointer v0.21.1 // indirect
@@ -51,6 +52,8 @@ require (
 	github.com/golang-sql/sqlexp v0.1.0 // indirect
 	github.com/google/gnostic-models v0.6.9 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
+	github.com/google/go-github/v73 v73.0.0 // indirect
+	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/huandu/xstrings v1.5.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
@@ -70,6 +73,9 @@ require (
 	github.com/muesli/termenv v0.15.2 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
+	github.com/risor-io/risor/modules/echarts v0.0.0-20250707023939-80191a41dbe4 // indirect
+	github.com/risor-io/risor/modules/github v0.0.0-20250707023939-80191a41dbe4 // indirect
+	github.com/risor-io/risor/modules/ssh v0.0.0-20250707023939-80191a41dbe4 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect

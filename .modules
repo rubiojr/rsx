@@ -4,8 +4,10 @@ bytes
 carbon
 cli
 color
+echarts
 exec
 fmt
+github
 http
 json
 net
@@ -13,6 +15,7 @@ os
 rand
 regexp
 sql
+ssh
 strconv
 strings
 tablewriter
