@@ -167,19 +167,6 @@ cli.app({
             },
         }),
         cli.command({
-            args: false,
-            name: "seed",
-            aliases: ["s"],
-            usage: "Seed the current directory",
-            action: func(ctx) {
-              os.write_file("main.risor", "import rsx\n"+`rsx.log("Hello, World!")`)
-              os.mkdir_all("lib")
-              os.write_file("lib/README.md", "Drop your .risor files here.")
-              print("- 'rsx build' to build the project.")
-              print("- 'risor --modules lib main.risor' to run the project.")
-            },
-        }),
-        cli.command({
             args: true,
             name: "refresh",
             usage: "Update the RSX library",
